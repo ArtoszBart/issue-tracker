@@ -1,0 +1,14 @@
+services:
+  db: 
+    container_name: issue-tracker-db
+    image: postgres:17.0-alpine3.20
+    environment:
+      POSTGRES_PASSWORD: supersecretpassword:)
+      POSTGRES_DB: issue-tracker
+    ports:
+      - 5432:5432
+    volumes:
+      - issue-tracker:/data/db
+
+volumes:
+  issue-tracker:
