@@ -9,6 +9,7 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { NewIssue, newIssueSchema } from '@/models/issue';
 import { zodResolver } from '@hookform/resolvers/zod';
+import ErrorMessage from '@/components/forms/ErrorMessage';
 const SimpleMDE = dynamic(() => import('react-simplemde-editor'), {
 	ssr: false,
 	loading: () => <p>Loading md editor...</p>,
@@ -46,11 +47,7 @@ const NewIssuePage = () => {
 				})}
 			>
 				<TextField.Root placeholder='Title' {...register('title')} />
-				{errors.title && (
-					<Text color='red' as='p'>
-						{errors.title.message}
-					</Text>
-				)}
+				<ErrorMessage message={errors.title?.message} />
 				<Controller
 					name='description'
 					control={control}
@@ -58,11 +55,7 @@ const NewIssuePage = () => {
 						<SimpleMDE placeholder='Description' {...field} />
 					)}
 				/>
-				{errors.description && (
-					<Text color='red' as='p'>
-						{errors.description.message}
-					</Text>
-				)}
+				<ErrorMessage message={errors.description?.message} />
 				<Button>Submit New Issue</Button>
 			</form>
 		</div>
