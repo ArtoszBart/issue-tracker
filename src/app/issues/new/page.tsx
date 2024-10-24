@@ -15,8 +15,10 @@ const SimpleMDE = dynamic(() => import('react-simplemde-editor'), {
 	ssr: false,
 	loading: () => <p>Loading md editor...</p>,
 });
+import delay from 'delay';
 
-const NewIssuePage = () => {
+const NewIssuePage = async () => {
+	await delay(2000);
 	const router = useRouter();
 	const [error, setError] = useState('');
 	const [isSubmitting, setIsSubmitting] = useState(false);
