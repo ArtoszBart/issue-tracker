@@ -2,12 +2,12 @@
 
 import 'easymde/dist/easymde.min.css';
 import { Button, Callout, TextField } from '@radix-ui/themes';
+import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { useForm, Controller } from 'react-hook-form';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
-import { ICreateIssue } from '@/models/issue';
-import { useState } from 'react';
+import { NewIssue } from '@/models/issue';
 const SimpleMDE = dynamic(() => import('react-simplemde-editor'), {
 	ssr: false,
 	loading: () => <p>Loading md editor...</p>,
@@ -15,7 +15,7 @@ const SimpleMDE = dynamic(() => import('react-simplemde-editor'), {
 
 const NewIssuePage = () => {
 	const router = useRouter();
-	const { register, control, handleSubmit } = useForm<ICreateIssue>();
+	const { register, control, handleSubmit } = useForm<NewIssue>();
 	const [error, setError] = useState('');
 
 	return (
