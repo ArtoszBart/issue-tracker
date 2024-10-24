@@ -21,3 +21,16 @@ export async function createIssue(issue: NewIssue): Promise<IIssue> {
 		},
 	});
 }
+
+export async function updateIssue(
+	id: number,
+	issue: NewIssue
+): Promise<IIssue> {
+	return await prisma.issue.update({
+		where: { id },
+		data: {
+			title: issue.title,
+			description: issue.description,
+		},
+	});
+}

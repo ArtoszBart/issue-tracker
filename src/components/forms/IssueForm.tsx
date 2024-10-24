@@ -7,7 +7,7 @@ import dynamic from 'next/dynamic';
 import { useForm, Controller } from 'react-hook-form';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
-import IIssue, { NewIssue, newIssueSchema } from '@/models/issue';
+import IIssue, { NewIssue, issueSchema } from '@/models/issue';
 import { zodResolver } from '@hookform/resolvers/zod';
 import ErrorMessage from '@/components/forms/ErrorMessage';
 import { Spinner } from '@/components';
@@ -30,7 +30,7 @@ const IssueForm = ({ issue }: IProps) => {
 		handleSubmit,
 		formState: { errors },
 	} = useForm<NewIssue>({
-		resolver: zodResolver(newIssueSchema),
+		resolver: zodResolver(issueSchema),
 	});
 
 	const onSubmit = handleSubmit(async (data) => {
