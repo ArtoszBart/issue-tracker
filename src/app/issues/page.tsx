@@ -1,9 +1,9 @@
 import React from 'react';
-import Link from 'next/link';
 import { Table } from '@radix-ui/themes';
 import IssueStatusBadge from '@/components/IssueStatusBadge';
 import { getIssues } from '@/repository/issueRepository';
 import IssuesToolbar from '@/components/IssuesToolbar';
+import Link from '@/components/Link';
 
 const IssuesPage = async () => {
 	const issues = await getIssues();
