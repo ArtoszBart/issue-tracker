@@ -1,7 +1,7 @@
 'use client';
 
 import 'easymde/dist/easymde.min.css';
-import { Button, Callout, Text, TextField } from '@radix-ui/themes';
+import { Button, Callout, TextField } from '@radix-ui/themes';
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { useForm, Controller } from 'react-hook-form';
@@ -10,7 +10,7 @@ import { useRouter } from 'next/navigation';
 import { NewIssue, newIssueSchema } from '@/models/issue';
 import { zodResolver } from '@hookform/resolvers/zod';
 import ErrorMessage from '@/components/forms/ErrorMessage';
-import Spinner from '@/components/Spinner';
+import { Spinner } from '@/components';
 const SimpleMDE = dynamic(() => import('react-simplemde-editor'), {
 	ssr: false,
 	loading: () => <p>Loading md editor...</p>,

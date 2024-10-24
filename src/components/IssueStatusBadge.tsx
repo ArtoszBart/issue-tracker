@@ -1,6 +1,5 @@
 import { Status } from '@/models/status';
 import { Badge } from '@radix-ui/themes';
-import React from 'react';
 
 interface IProps {
 	status: Status;
