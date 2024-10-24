@@ -10,6 +10,7 @@ import { useRouter } from 'next/navigation';
 import { NewIssue, newIssueSchema } from '@/models/issue';
 import { zodResolver } from '@hookform/resolvers/zod';
 import ErrorMessage from '@/components/forms/ErrorMessage';
+import Spinner from '@/components/Spinner';
 const SimpleMDE = dynamic(() => import('react-simplemde-editor'), {
 	ssr: false,
 	loading: () => <p>Loading md editor...</p>,
@@ -18,6 +19,7 @@ const SimpleMDE = dynamic(() => import('react-simplemde-editor'), {
 const NewIssuePage = () => {
 	const router = useRouter();
 	const [error, setError] = useState('');
+	const [isSubmitting, setIsSubmitting] = useState(false);
 	const {
 		register,
 		control,
@@ -39,9 +41,11 @@ const NewIssuePage = () => {
 				className='space-y-3'
 				onSubmit={handleSubmit(async (data) => {
 					try {
+						setIsSubmitting(true);
 						await axios.post('/api/issues', data);
 						router.push('/issues');
 					} catch (error) {
+						setIsSubmitting(false);
 						setError('An unexpected error occured.');
 					}
 				})}
@@ -56,7 +60,10 @@ const NewIssuePage = () => {
 					)}
 				/>
 				<ErrorMessage message={errors.description?.message} />
-				<Button>Submit New Issue</Button>
+				<Button disabled={isSubmitting}>
+					{isSubmitting && <Spinner />}
+					Submit New Issue
+				</Button>
 			</form>
 		</div>
 	);
