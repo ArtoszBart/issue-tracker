@@ -2,6 +2,8 @@ import { Table } from '@radix-ui/themes';
 import { getIssues } from '@/repository/issueRepository';
 import { Link, IssueStatusBadge, IssuesToolbar } from '@/components';
 
+export const dynamic = 'force-dynamic';
+
 const IssuesPage = async () => {
 	const issues = await getIssues();
 
