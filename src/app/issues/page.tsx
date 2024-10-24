@@ -1,14 +1,12 @@
 import React from 'react';
 import Link from 'next/link';
-import delay from 'delay';
-import { Button, Table } from '@radix-ui/themes';
+import { Table } from '@radix-ui/themes';
 import IssueStatusBadge from '@/components/IssueStatusBadge';
 import { getIssues } from '@/repository/issueRepository';
 import IssuesToolbar from '@/components/IssuesToolbar';
 
 const IssuesPage = async () => {
 	const issues = await getIssues();
-	await delay(2000);
 
 	return (
 		<div>
@@ -29,7 +27,9 @@ const IssuesPage = async () => {
 					{issues.map((issue) => (
 						<Table.Row key={issue.id}>
 							<Table.Cell>
-								{issue.title}
+								<Link href={`/issues/${issue.id}`}>
+									{issue.title}
+								</Link>
 								<div className='block md:hidden'>
 									<IssueStatusBadge status={issue.status} />
 								</div>
