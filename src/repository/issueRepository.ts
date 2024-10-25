@@ -34,3 +34,11 @@ export async function updateIssue(
 		},
 	});
 }
+
+export async function deleteIssue(id: number): Promise<IIssue> {
+	return await prisma.issue.delete({
+		where: {
+			id,
+		},
+	});
+}
