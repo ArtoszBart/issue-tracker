@@ -1,9 +1,11 @@
+import authOptions from '@/auth/authOptions';
 import { issueSchema } from '@/models/issue';
 import {
 	deleteIssue,
 	getIssue,
 	updateIssue,
 } from '@/repository/issueRepository';
+import { getServerSession } from 'next-auth';
 import { NextRequest, NextResponse } from 'next/server';
 
 interface IProps {
@@ -11,6 +13,9 @@ interface IProps {
 }
 
 export async function PATCH(request: NextRequest, { params }: IProps) {
+	const session = await getServerSession(authOptions);
+	if (!session) return NextResponse.json({}, { status: 401 });
+
 	const body = await request.json();
 
 	const validation = issueSchema.safeParse(body);
@@ -31,6 +36,9 @@ export async function PATCH(request: NextRequest, { params }: IProps) {
 }
 
 export async function DELETE(request: NextRequest, { params }: IProps) {
+	const session = await getServerSession(authOptions);
+	if (!session) return NextResponse.json({}, { status: 401 });
+
 	const id = Number(params.id);
 	if (isNaN(id))
 		return NextResponse.json({ error: 'Invalid issue' }, { status: 400 });

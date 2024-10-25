@@ -4,12 +4,16 @@ import { notFound } from 'next/navigation';
 import EditIssueButton from '@/components/EditIssueButton';
 import IssueDetails from '@/components/IssueDetails';
 import DeleteIssueButton from '@/components/DeleteIssueButton';
+import { getServerSession } from 'next-auth';
+import authOptions from '@/auth/authOptions';
 
 interface IProps {
 	params: { id: string };
 }
 
 const IssueDetailPage = async ({ params }: IProps) => {
+	const session = await getServerSession(authOptions);
+
 	const id = Number(params.id);
 	if (isNaN(id)) notFound();
 
@@ -21,12 +25,14 @@ const IssueDetailPage = async ({ params }: IProps) => {
 			<Box className='md:col-span-4'>
 				<IssueDetails issue={issue} />
 			</Box>
-			<Box>
-				<Flex direction='column' gap='4'>
-					<EditIssueButton issueId={issue.id} />
-					<DeleteIssueButton issueId={issue.id} />
-				</Flex>
-			</Box>
+			{session && (
+				<Box>
+					<Flex direction='column' gap='4'>
+						<EditIssueButton issueId={issue.id} />
+						<DeleteIssueButton issueId={issue.id} />
+					</Flex>
+				</Box>
+			)}
 		</Grid>
 	);
 };
