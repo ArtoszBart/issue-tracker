@@ -8,3 +8,11 @@ export async function getUsers(): Promise<User[]> {
 		},
 	});
 }
+
+export async function getUser(id: string): Promise<User | null> {
+	return await prisma.user.findUnique({
+		where: {
+			id,
+		},
+	});
+}

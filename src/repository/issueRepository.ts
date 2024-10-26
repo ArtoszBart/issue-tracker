@@ -1,5 +1,5 @@
 import prisma from '@/config/prismaClient';
-import IIssue, { NewIssue } from '@/models/issue';
+import IIssue, { NewIssue, PatchIssue } from '@/models/issue';
 
 export async function getIssues(): Promise<IIssue[]> {
 	return await prisma.issue.findMany();
@@ -24,13 +24,14 @@ export async function createIssue(issue: NewIssue): Promise<IIssue> {
 
 export async function updateIssue(
 	id: number,
-	issue: NewIssue
+	issue: PatchIssue
 ): Promise<IIssue> {
 	return await prisma.issue.update({
 		where: { id },
 		data: {
 			title: issue.title,
 			description: issue.description,
+			assignedToUserId: issue.assignedToUserId,
 		},
 	});
 }
