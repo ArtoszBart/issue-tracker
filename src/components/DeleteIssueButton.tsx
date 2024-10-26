@@ -25,6 +25,7 @@ const DeleteIssueButton = ({ issueId }: IProps) => {
 		} catch (error) {
 			setIsError(true);
 			setIsDeleting(false);
+			console.error(error);
 		}
 	};
 
