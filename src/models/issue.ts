@@ -24,7 +24,7 @@ export const patchIssueSchema = z.object({
 export type NewIssue = z.infer<typeof issueSchema>;
 export type PatchIssue = z.infer<typeof patchIssueSchema>;
 
-export default interface IIssue extends NewIssue {
+export default interface IIssue extends PatchIssue {
 	id: number;
 	status: Status;
 	createdAt: Date;
