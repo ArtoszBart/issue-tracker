@@ -1,11 +1,20 @@
 import { Table } from '@radix-ui/themes';
 import { getIssues } from '@/repository/issueRepository';
 import { Link, IssueStatusBadge, IssuesToolbar } from '@/components';
+import { Status } from '@/models/status';
 
 export const dynamic = 'force-dynamic';
 
-const IssuesPage = async () => {
-	const issues = await getIssues();
+interface IProps {
+	searchParams: { status: Status };
+}
+
+const IssuesPage = async ({ searchParams }: IProps) => {
+	const statuses = Object.values(Status);
+	const status = statuses.includes(searchParams.status)
+		? searchParams.status
+		: undefined;
+	const issues = await getIssues({ status });
 
 	return (
 		<div>

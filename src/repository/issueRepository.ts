@@ -1,8 +1,17 @@
 import prisma from '@/config/prismaClient';
 import IIssue, { NewIssue, PatchIssue } from '@/models/issue';
+import { Status } from '@/models/status';
 
-export async function getIssues(): Promise<IIssue[]> {
-	return await prisma.issue.findMany();
+interface IFilters {
+	status: Status | undefined;
+}
+
+export async function getIssues({ status }: IFilters): Promise<IIssue[]> {
+	return await prisma.issue.findMany({
+		where: {
+			status,
+		},
+	});
 }
 
 export async function getIssue(id: number): Promise<IIssue | null> {
