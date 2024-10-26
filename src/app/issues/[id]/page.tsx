@@ -6,7 +6,7 @@ import IssueDetails from '@/components/IssueDetails';
 import DeleteIssueButton from '@/components/DeleteIssueButton';
 import { getServerSession } from 'next-auth';
 import authOptions from '@/auth/authOptions';
-import AssigneeSelect from '@/components/AssigneeSelect';
+import AssigneeSelect from '@/components/AssigneeSelect/AssigneeSelect';
 
 interface IProps {
 	params: { id: string };
