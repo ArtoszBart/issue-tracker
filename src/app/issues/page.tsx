@@ -32,11 +32,23 @@ const IssuesPage = async ({ searchParams }: IProps) => {
 			className: 'hidden md:table-cell',
 		},
 	];
+
 	const statuses = Object.values(Status);
 	const status = statuses.includes(searchParams.status)
 		? searchParams.status
 		: undefined;
-	const issues = await getIssues({ status });
+
+	const orderBy = columns
+		.map((column) => column.value)
+		.includes(searchParams.orderBy)
+		? { [searchParams.orderBy]: 'asc' }
+		: undefined;
+
+	console.log('====================================');
+	console.log(searchParams);
+	console.log('====================================');
+
+	const issues = await getIssues({ status, orderBy });
 
 	return (
 		<div>
@@ -58,10 +70,10 @@ const IssuesPage = async ({ searchParams }: IProps) => {
 									}}
 								>
 									{column.label}
+									{column.value === searchParams.orderBy && (
+										<ArrowUpIcon className='inline' />
+									)}
 								</NextLink>
-								{column.value === searchParams.orderBy && (
-									<ArrowUpIcon className='inline' />
-								)}
 							</Table.ColumnHeaderCell>
 						))}
 					</Table.Row>
