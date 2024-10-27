@@ -4,12 +4,20 @@ import { Link, IssueStatusBadge, IssuesToolbar } from '@/components';
 import NextLink from 'next/link';
 import { Status } from '@/models/status';
 import IIssue from '@/models/issue';
-import { ArrowUpIcon } from '@radix-ui/react-icons';
+import {
+	ArrowUpIcon,
+	TriangleUpIcon,
+	TriangleDownIcon,
+} from '@radix-ui/react-icons';
 
 export const dynamic = 'force-dynamic';
 
 interface IProps {
-	searchParams: { status: Status; orderBy: keyof IIssue };
+	searchParams: {
+		status: Status;
+		orderBy: keyof IIssue;
+		sort: 'asc' | 'desc';
+	};
 }
 
 interface ITableColumn {
@@ -41,12 +49,8 @@ const IssuesPage = async ({ searchParams }: IProps) => {
 	const orderBy = columns
 		.map((column) => column.value)
 		.includes(searchParams.orderBy)
-		? { [searchParams.orderBy]: 'asc' }
+		? { [searchParams.orderBy]: searchParams.sort }
 		: undefined;
-
-	console.log('====================================');
-	console.log(searchParams);
-	console.log('====================================');
 
 	const issues = await getIssues({ status, orderBy });
 
@@ -66,13 +70,24 @@ const IssuesPage = async ({ searchParams }: IProps) => {
 										query: {
 											...searchParams,
 											orderBy: column.value,
+											sort:
+												column.value !==
+												searchParams.orderBy
+													? 'asc'
+													: searchParams.sort ===
+													  'desc'
+													? 'asc'
+													: 'desc',
 										},
 									}}
 								>
 									{column.label}
-									{column.value === searchParams.orderBy && (
-										<ArrowUpIcon className='inline' />
-									)}
+									{column.value === searchParams.orderBy &&
+										(searchParams.sort === 'asc' ? (
+											<TriangleUpIcon className='inline' />
+										) : (
+											<TriangleDownIcon className='inline' />
+										))}
 								</NextLink>
 							</Table.ColumnHeaderCell>
 						))}
