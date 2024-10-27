@@ -63,7 +63,7 @@ const IssuesPage = async ({ searchParams }: IProps) => {
 						{columns.map((column) => (
 							<Table.ColumnHeaderCell
 								key={column.value}
-								className='hidden md:table-cell'
+								className={column.className}
 							>
 								<NextLink
 									href={{
