@@ -5,18 +5,36 @@ import { Status } from '@/models/status';
 interface IIssuesListMods {
 	status: Status | undefined;
 	orderBy: {} | undefined;
+	skip: number;
+	take: number;
 }
 
 export async function getIssues({
 	status,
 	orderBy,
-}: IIssuesListMods): Promise<IIssue[]> {
-	return await prisma.issue.findMany({
-		where: {
-			status,
-		},
+	skip,
+	take,
+}: IIssuesListMods): Promise<{ issueCount: number; issues: IIssue[] }> {
+	const where = {
+		status,
+	};
+	const issues = await prisma.issue.findMany({
+		where,
 		orderBy,
+		skip,
+		take,
 	});
+
+	const issueCount = await prisma.issue.count({
+		where,
+	});
+
+	const result = {
+		issueCount,
+		issues,
+	};
+
+	return result;
 }
 
 export async function getIssue(id: number): Promise<IIssue | null> {

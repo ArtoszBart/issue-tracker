@@ -9,6 +9,7 @@ import {
 	TriangleUpIcon,
 	TriangleDownIcon,
 } from '@radix-ui/react-icons';
+import Pagination from '@/components/Pagination';
 
 export const dynamic = 'force-dynamic';
 
@@ -17,6 +18,7 @@ interface IProps {
 		status: Status;
 		orderBy: keyof IIssue;
 		sort: 'asc' | 'desc';
+		page: string;
 	};
 }
 
@@ -52,12 +54,20 @@ const IssuesPage = async ({ searchParams }: IProps) => {
 		? { [searchParams.orderBy]: searchParams.sort }
 		: undefined;
 
-	const issues = await getIssues({ status, orderBy });
+	const page = Number(searchParams.page) || 1;
+	const pageSize = 10;
+
+	const { issueCount, issues } = await getIssues({
+		status,
+		orderBy,
+		skip: (page - 1) * pageSize,
+		take: pageSize,
+	});
 
 	return (
 		<div>
 			<IssuesToolbar />
-			<Table.Root variant='surface'>
+			<Table.Root variant='surface' mb='5'>
 				<Table.Header>
 					<Table.Row>
 						{columns.map((column) => (
@@ -114,6 +124,11 @@ const IssuesPage = async ({ searchParams }: IProps) => {
 					))}
 				</Table.Body>
 			</Table.Root>
+			<Pagination
+				pageSize={pageSize}
+				currentPage={page}
+				itemCount={issueCount}
+			/>
 		</div>
 	);
 };
