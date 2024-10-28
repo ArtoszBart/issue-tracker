@@ -1,3 +1,4 @@
+import IssueChart from '@/components/IssueChart';
 import IssueSummary from '@/components/IssueSummary';
 import LatestIssues from '@/components/LatestIssues';
 import { getIssueCount } from '@/repository/issueRepository';
@@ -8,7 +9,12 @@ export default async function Home() {
 	const closedIssueCount = await getIssueCount({ status: 'CLOSED' });
 
 	return (
-		<IssueSummary
+		// <IssueSummary
+		// 	open={openIssueCount}
+		// 	inProgress={inProgressIssueCount}
+		// 	closed={closedIssueCount}
+		// />
+		<IssueChart
 			open={openIssueCount}
 			inProgress={inProgressIssueCount}
 			closed={closedIssueCount}
