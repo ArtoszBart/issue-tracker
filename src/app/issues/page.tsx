@@ -3,7 +3,7 @@ import IssueTable, { IIssueQuery } from '@/components/IssueTable/IssueTable';
 import { columnNames } from '@/components/IssueTable/columnDefinitions';
 import Pagination from '@/components/Pagination';
 import { Status } from '@/models/status';
-import { getIssues } from '@/repository/issueRepository';
+import { getIssues, getIssueCount } from '@/repository/issueRepository';
 import { Flex } from '@radix-ui/themes';
 
 export const dynamic = 'force-dynamic';
@@ -25,12 +25,14 @@ const IssuesPage = async ({ searchParams }: IProps) => {
 	const page = Number(searchParams.page) || 1;
 	const pageSize = 10;
 
-	const { issueCount, issues } = await getIssues({
+	const issues = await getIssues({
 		status,
 		orderBy,
 		skip: (page - 1) * pageSize,
 		take: pageSize,
 	});
+
+	const issueCount = await getIssueCount({ status });
 
 	return (
 		<Flex direction='column' gap='3'>

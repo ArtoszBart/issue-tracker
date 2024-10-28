@@ -5,7 +5,7 @@ import Link from 'next/link';
 import IssueStatusBadge from './IssueStatusBadge';
 
 const LatestIssues = async () => {
-	const { issues } = await getIssues({ take: 5, assignedToUser: true });
+	const issues = await getIssues({ take: 5, assignedToUser: true });
 
 	return (
 		<Card>

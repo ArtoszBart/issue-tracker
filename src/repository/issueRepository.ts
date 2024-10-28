@@ -2,7 +2,7 @@ import prisma from '@/config/prismaClient';
 import IIssue, { NewIssue, PatchIssue } from '@/models/issue';
 import { Status } from '@/models/status';
 
-interface IIssuesListMods {
+interface IIssuesMods {
 	status?: Status;
 	orderBy?: {};
 	skip?: number;
@@ -16,30 +16,28 @@ export async function getIssues({
 	skip,
 	take,
 	assignedToUser,
-}: IIssuesListMods = {}): Promise<{ issueCount: number; issues: IIssue[] }> {
-	const where = {
-		status,
-	};
-	const issues = await prisma.issue.findMany({
-		where,
+}: IIssuesMods = {}): Promise<IIssue[]> {
+	return await prisma.issue.findMany({
 		orderBy,
 		skip,
 		take,
+		where: {
+			status,
+		},
 		include: {
 			assignedToUser,
 		},
 	});
+}
 
-	const issueCount = await prisma.issue.count({
-		where,
+export async function getIssueCount({
+	status,
+}: IIssuesMods = {}): Promise<number> {
+	return await prisma.issue.count({
+		where: {
+			status,
+		},
 	});
-
-	const result = {
-		issueCount,
-		issues,
-	};
-
-	return result;
 }
 
 export async function getIssue(id: number): Promise<IIssue | null> {
