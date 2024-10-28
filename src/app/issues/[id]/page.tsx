@@ -7,11 +7,13 @@ import DeleteIssueButton from '@/components/DeleteIssueButton';
 import { getServerSession } from 'next-auth';
 import authOptions from '@/auth/authOptions';
 import AssigneeSelect from '@/components/AssigneeSelect/AssigneeSelect';
-import { title } from 'process';
+import { cache } from 'react';
 
 interface IProps {
 	params: { id: string };
 }
+
+const fetchIssue = cache((issueId: number) => getIssue(issueId));
 
 const IssueDetailPage = async ({ params }: IProps) => {
 	const session = await getServerSession(authOptions);
@@ -19,7 +21,7 @@ const IssueDetailPage = async ({ params }: IProps) => {
 	const id = Number(params.id);
 	if (isNaN(id)) notFound();
 
-	const issue = await getIssue(id);
+	const issue = await fetchIssue(id);
 	if (!issue) notFound();
 
 	return (
@@ -41,7 +43,7 @@ const IssueDetailPage = async ({ params }: IProps) => {
 };
 
 export async function generateMetadata({ params }: IProps) {
-	const issue = await getIssue(Number(params.id));
+	const issue = await fetchIssue(Number(params.id));
 
 	return {
 		title: issue?.title,
