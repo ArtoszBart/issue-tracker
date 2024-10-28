@@ -21,4 +21,13 @@ const EditIssuePage = async ({ params }: IProps) => {
 	return <IssueForm issue={issue} />;
 };
 
+export async function generateMetadata({ params }: IProps) {
+	const issue = await getIssue(Number(params.id));
+
+	return {
+		title: 'Edit Issue: ' + issue?.title,
+		description: 'Details of issue ' + issue?.id,
+	};
+}
+
 export default EditIssuePage;

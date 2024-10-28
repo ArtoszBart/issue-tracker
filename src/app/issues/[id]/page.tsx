@@ -7,6 +7,7 @@ import DeleteIssueButton from '@/components/DeleteIssueButton';
 import { getServerSession } from 'next-auth';
 import authOptions from '@/auth/authOptions';
 import AssigneeSelect from '@/components/AssigneeSelect/AssigneeSelect';
+import { title } from 'process';
 
 interface IProps {
 	params: { id: string };
@@ -38,5 +39,14 @@ const IssueDetailPage = async ({ params }: IProps) => {
 		</Grid>
 	);
 };
+
+export async function generateMetadata({ params }: IProps) {
+	const issue = await getIssue(Number(params.id));
+
+	return {
+		title: issue?.title,
+		description: 'Details of issue ' + issue?.id,
+	};
+}
 
 export default IssueDetailPage;
