@@ -3,18 +3,20 @@ import IIssue, { NewIssue, PatchIssue } from '@/models/issue';
 import { Status } from '@/models/status';
 
 interface IIssuesListMods {
-	status: Status | undefined;
-	orderBy: {} | undefined;
-	skip: number;
-	take: number;
+	status?: Status;
+	orderBy?: {};
+	skip?: number;
+	take?: number;
+	assignedToUser?: boolean;
 }
 
 export async function getIssues({
 	status,
-	orderBy,
+	orderBy = { createdAt: 'desc' },
 	skip,
 	take,
-}: IIssuesListMods): Promise<{ issueCount: number; issues: IIssue[] }> {
+	assignedToUser,
+}: IIssuesListMods = {}): Promise<{ issueCount: number; issues: IIssue[] }> {
 	const where = {
 		status,
 	};
@@ -23,6 +25,9 @@ export async function getIssues({
 		orderBy,
 		skip,
 		take,
+		include: {
+			assignedToUser,
+		},
 	});
 
 	const issueCount = await prisma.issue.count({
