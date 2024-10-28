@@ -9,12 +9,10 @@ interface IStatusContainer {
 }
 
 interface IProps {
-	open: number;
-	inProgress: number;
-	closed: number;
+	data: { open: number; inProgress: number; closed: number };
 }
 
-const IssueSummary = ({ open, inProgress, closed }: IProps) => {
+const IssueSummary = ({ data: { open, inProgress, closed } }: IProps) => {
 	const containers: IStatusContainer[] = [
 		{ label: 'Open issues', value: open, status: 'OPEN' },
 		{

@@ -2,22 +2,22 @@ import IssueChart from '@/components/IssueChart';
 import IssueSummary from '@/components/IssueSummary';
 import LatestIssues from '@/components/LatestIssues';
 import { getIssueCount } from '@/repository/issueRepository';
+import { Flex, Grid } from '@radix-ui/themes';
 
 export default async function Home() {
-	const openIssueCount = await getIssueCount({ status: 'OPEN' });
-	const inProgressIssueCount = await getIssueCount({ status: 'IN_PROGRESS' });
-	const closedIssueCount = await getIssueCount({ status: 'CLOSED' });
+	const issueCount = {
+		open: await getIssueCount({ status: 'OPEN' }),
+		inProgress: await getIssueCount({ status: 'IN_PROGRESS' }),
+		closed: await getIssueCount({ status: 'CLOSED' }),
+	};
 
 	return (
-		// <IssueSummary
-		// 	open={openIssueCount}
-		// 	inProgress={inProgressIssueCount}
-		// 	closed={closedIssueCount}
-		// />
-		<IssueChart
-			open={openIssueCount}
-			inProgress={inProgressIssueCount}
-			closed={closedIssueCount}
-		/>
+		<Grid columns={{ initial: '1', md: '2' }} gap='5'>
+			<Flex direction='column' gap='5'>
+				<IssueSummary data={issueCount} />
+				<IssueChart data={issueCount} />
+			</Flex>
+			<LatestIssues />
+		</Grid>
 	);
 }
