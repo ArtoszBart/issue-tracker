@@ -1,3 +1,5 @@
+import { withSentryConfig } from '@sentry/nextjs';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	async headers() {
@@ -10,4 +12,16 @@ const nextConfig = {
 	},
 };
 
-export default nextConfig;
+export default withSentryConfig(nextConfig, {
+	org: 'artstack-hz',
+	project: 'issue-tracker',
+	silent: !process.env.CI,
+	widenClientFileUpload: true,
+	reactComponentAnnotation: {
+		enabled: true,
+	},
+	tunnelRoute: '/monitoring',
+	hideSourceMaps: true,
+	disableLogger: true,
+	automaticVercelMonitors: true,
+});
