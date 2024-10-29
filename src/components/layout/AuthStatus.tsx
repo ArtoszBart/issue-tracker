@@ -2,6 +2,7 @@ import { Box, DropdownMenu, Avatar, Text } from '@radix-ui/themes';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { Skeleton } from '@/components';
+import PlaceholderImage from '@/assets/placeholder.png';
 
 const AuthStatus = () => {
 	const { status, data: session } = useSession();
@@ -19,8 +20,12 @@ const AuthStatus = () => {
 			<DropdownMenu.Root>
 				<DropdownMenu.Trigger>
 					<Avatar
-						src={session!.user!.image!}
-						fallback='?'
+						src={
+							session!.user!.image
+								? session!.user!.image
+								: PlaceholderImage.src
+						}
+						fallback=''
 						radius='full'
 						className='cursor-pointer'
 					/>

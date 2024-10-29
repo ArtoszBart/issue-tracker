@@ -5,7 +5,7 @@ import {
 	getIssue,
 	updateIssue,
 } from '@/repository/issueRepository';
-import { getUser } from '@/repository/userRepository';
+import { getUserById } from '@/repository/userRepository';
 import { getServerSession } from 'next-auth';
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -25,7 +25,7 @@ export async function PATCH(request: NextRequest, { params }: IProps) {
 
 	const { assignedToUserId } = body;
 	if (assignedToUserId) {
-		const user = await getUser(assignedToUserId);
+		const user = await getUserById(assignedToUserId);
 		if (!user)
 			return NextResponse.json(
 				{ error: 'Invalid user.' },
