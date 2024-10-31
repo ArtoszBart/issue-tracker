@@ -11,6 +11,9 @@ const config: Config = {
 			colors: {
 				background: 'var(--background)',
 				foreground: 'var(--foreground)',
+				facebook: '#0866ff',
+				githubbg: '#010409',
+				githublogo: '#f0f6fc',
 			},
 		},
 	},

@@ -4,13 +4,14 @@ import { ReactNode } from 'react';
 
 interface IProps {
 	href: string;
+	className: string;
 	children: ReactNode;
 }
 
-const Link = ({ href, children }: IProps) => {
+const Link = ({ href, className, children }: IProps) => {
 	return (
 		<NextLink href={href} passHref legacyBehavior>
-			<RadixLink>{children}</RadixLink>
+			<RadixLink className={className}>{children}</RadixLink>
 		</NextLink>
 	);
 };
