@@ -32,6 +32,6 @@ const page = async () => {
 export default page;
 
 export const metadata: Metadata = {
-	title: 'Issue Tracker - Dashboard',
-	description: 'View a summary of project issues',
+	title: 'Issue Tracker - Sign In',
+	description: 'Sign in to Issue Tracker',
 };
