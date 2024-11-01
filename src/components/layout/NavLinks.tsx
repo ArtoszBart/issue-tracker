@@ -12,12 +12,13 @@ const NavLinks = () => {
 	return (
 		<ul className='flex space-x-6'>
 			{links.map((link) => (
-				<li key={link.href}>
+				<li key={link.href} className='cursor-pointer'>
 					<Link
 						href={link.href}
 						className={classNames({
 							'nav-link': true,
 							'!text-zinc-900': link.href === currentPath,
+							'pointer-events-none': link.href === currentPath,
 						})}
 					>
 						{link.label}
