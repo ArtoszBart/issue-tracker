@@ -24,7 +24,7 @@ const IssuesPage = async ({ searchParams }: IProps) => {
 		: undefined;
 
 	const page = Number(searchParams.page) || 1;
-	const pageSize = 10;
+	const pageSize = Number(searchParams.pageSize) || 10;
 
 	const issues = await getIssues({
 		status,

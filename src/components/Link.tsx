@@ -4,7 +4,7 @@ import { ReactNode } from 'react';
 
 interface IProps {
 	href: string;
-	className: string;
+	className?: string;
 	children: ReactNode;
 }
 

@@ -12,6 +12,7 @@ export interface IIssueQuery {
 	orderBy: keyof IIssue;
 	sort: 'asc' | 'desc';
 	page: string;
+	pageSize: string;
 }
 
 interface IProps {
