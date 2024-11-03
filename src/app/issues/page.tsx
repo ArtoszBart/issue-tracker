@@ -20,6 +20,8 @@ const IssuesPage = async ({ searchParams }: IProps) => {
 		? searchParams.status
 		: undefined;
 
+	const assignedToUserId = searchParams.assignedTo;
+
 	const orderBy = columnNames.includes(searchParams.orderBy)
 		? { [searchParams.orderBy]: searchParams.sort }
 		: undefined;
@@ -29,12 +31,16 @@ const IssuesPage = async ({ searchParams }: IProps) => {
 
 	const issues = await getIssues({
 		status,
+		assignedToUserId,
 		orderBy,
 		skip: (page - 1) * pageSize,
 		take: pageSize,
 	});
 
-	const issueCount = await getIssueCount({ status });
+	const issueCount = await getIssueCount({
+		status,
+		assignedToUserId,
+	});
 
 	return (
 		<Flex direction='column' gap='3'>

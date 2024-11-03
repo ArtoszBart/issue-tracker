@@ -21,6 +21,11 @@ const IssuePageSizeSelector = () => {
 					params.append('orderBy', searchParams.get('orderBy')!);
 				if (searchParams.get('sort'))
 					params.append('sort', searchParams.get('sort')!);
+				if (searchParams.get('assignedTo'))
+					params.append(
+						'assignedTo',
+						searchParams.get('assignedTo')!
+					);
 
 				const query = params.size ? `?${params.toString()}` : '';
 

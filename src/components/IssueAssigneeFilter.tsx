@@ -1,36 +1,33 @@
 'use client';
 
-import { Status } from '@/models/status';
+import useUsers from '@/data/useUsers';
 import { Select } from '@radix-ui/themes';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { Skeleton } from '@/components';
 
-const statuses: { label: string; value: Status | 'none' }[] = [
-	{ label: 'All', value: 'none' },
-	{ label: 'Open', value: 'OPEN' },
-	{ label: 'In Progress', value: 'IN_PROGRESS' },
-	{ label: 'Closed', value: 'CLOSED' },
-];
-
-const IssueStatusFilter = () => {
+const IssueAssigneeFilter = () => {
 	const router = useRouter();
 	const searchParams = useSearchParams();
+
+	const { data: users, error, isLoading } = useUsers();
+
+	if (isLoading) return <Skeleton height='2rem' width='10.5rem' />;
+
+	if (error) return null;
 
 	return (
 		<Select.Root
 			defaultValue={searchParams.get('status') || ''}
-			onValueChange={(status) => {
+			onValueChange={(userId) => {
 				const params = new URLSearchParams();
-				if (status && status !== 'none')
-					params.append('status', status);
+				if (userId && userId !== 'none')
+					params.append('assignedTo', userId);
 				if (searchParams.get('orderBy'))
 					params.append('orderBy', searchParams.get('orderBy')!);
 				if (searchParams.get('sort'))
 					params.append('sort', searchParams.get('sort')!);
-				if (searchParams.get('assignedTo'))
-					params.append(
-						'assignedTo',
-						searchParams.get('assignedTo')!
-					);
+				if (searchParams.get('status'))
+					params.append('status', searchParams.get('status')!);
 				if (searchParams.get('pageSize'))
 					params.append('pageSize', searchParams.get('pageSize')!);
 
@@ -39,11 +36,11 @@ const IssueStatusFilter = () => {
 				router.push('/issues' + query);
 			}}
 		>
-			<Select.Trigger placeholder='Filter by status...' />
+			<Select.Trigger placeholder='Filter by assignee...' />
 			<Select.Content>
-				{statuses.map((status) => (
-					<Select.Item key={status.value} value={status.value}>
-						{status.label}
+				{users?.map((user) => (
+					<Select.Item key={user.id} value={user.id}>
+						{user.name}
 					</Select.Item>
 				))}
 			</Select.Content>
@@ -51,4 +48,4 @@ const IssueStatusFilter = () => {
 	);
 };
 
-export default IssueStatusFilter;
+export default IssueAssigneeFilter;

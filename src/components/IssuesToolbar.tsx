@@ -1,14 +1,15 @@
 import Link from 'next/link';
-import { Box, Button, Flex } from '@radix-ui/themes';
+import { Button, Flex } from '@radix-ui/themes';
 import IssueStatusFilter from './IssueStatusFilter';
-import IssuePageSizeSelector from './IssuePageSizeSelector';
+import IssueAssigneeFilter from './IssueAssigneeFilter';
 
 const IssuesToolbar = () => {
 	return (
 		<Flex justify='between'>
-			<Box className='space-x-2'>
+			<Flex gap='2' className='bugged-skeleton'>
 				<IssueStatusFilter />
-			</Box>
+				<IssueAssigneeFilter />
+			</Flex>
 			<Button>
 				<Link href='/issues/new'>New Issue</Link>
 			</Button>

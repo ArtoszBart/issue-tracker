@@ -4,6 +4,7 @@ import { Status } from '@/models/status';
 
 interface IIssuesMods {
 	status?: Status;
+	assignedToUserId?: string;
 	orderBy?: {};
 	skip?: number;
 	take?: number;
@@ -12,6 +13,7 @@ interface IIssuesMods {
 
 export async function getIssues({
 	status,
+	assignedToUserId,
 	orderBy = { createdAt: 'desc' },
 	skip,
 	take,
@@ -23,6 +25,7 @@ export async function getIssues({
 		take,
 		where: {
 			status,
+			assignedToUserId,
 		},
 		include: {
 			assignedToUser,
@@ -32,10 +35,12 @@ export async function getIssues({
 
 export async function getIssueCount({
 	status,
+	assignedToUserId,
 }: IIssuesMods = {}): Promise<number> {
 	return await prisma.issue.count({
 		where: {
 			status,
+			assignedToUserId,
 		},
 	});
 }

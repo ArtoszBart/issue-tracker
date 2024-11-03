@@ -9,6 +9,7 @@ import { columns } from './columnDefinitions';
 
 export interface IIssueQuery {
 	status: Status;
+	assignedTo: string;
 	orderBy: keyof IIssue;
 	sort: 'asc' | 'desc';
 	page: string;
