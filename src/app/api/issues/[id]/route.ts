@@ -42,6 +42,7 @@ export async function PATCH(request: NextRequest, { params }: IProps) {
 				{ error: 'Invalid user.' },
 				{ status: 400 }
 			);
+		else body.status = 'IN_PROGRESS';
 	}
 
 	const id = Number(params.id);

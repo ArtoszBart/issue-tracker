@@ -3,9 +3,11 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import User from '@/models/user';
 import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 
 const useAssigneeSelect = (issue: IIssue) => {
 	const { data: users, error, isLoading } = useUsers();
+	const router = useRouter();
 
 	const assignIssue = (userId: string) => {
 		axios
@@ -14,6 +16,7 @@ const useAssigneeSelect = (issue: IIssue) => {
 			})
 			.then(() => {
 				toast.success('Changes are saved.');
+				router.refresh();
 			})
 			.catch(() => {
 				toast.error('Changes could not be saved.');

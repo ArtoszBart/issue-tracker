@@ -14,10 +14,7 @@ const StatusSelect = ({ issue }: IProps) => {
 
 	return (
 		<>
-			<Select.Root
-				defaultValue={issue.status}
-				onValueChange={hook.changeStatus}
-			>
+			<Select.Root value={issue.status} onValueChange={hook.changeStatus}>
 				<Select.Trigger />
 				<Select.Content>
 					<Select.Group>
