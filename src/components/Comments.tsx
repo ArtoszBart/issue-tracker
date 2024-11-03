@@ -9,7 +9,9 @@ interface IProps {
 const Comments = ({ comments }: IProps) => {
 	return (
 		<Box className='space-y-5'>
-			<Heading as='h2'>Comments</Heading>
+			<Heading size='4' as='h2'>
+				Comments
+			</Heading>
 			{comments?.map((comment) => (
 				<Comment comment={comment} />
 			))}

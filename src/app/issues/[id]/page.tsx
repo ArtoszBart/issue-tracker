@@ -10,6 +10,12 @@ import AssigneeSelect from '@/components/AssigneeSelect/AssigneeSelect';
 import { cache } from 'react';
 import { StatusSelect } from '@/components/StatusSelect';
 import Comments from '@/components/Comments';
+import dynamic from 'next/dynamic';
+import CommentFormSkeleton from '@/components/forms/CommentFormSkeleton';
+const CommentForm = dynamic(() => import('@/components/CommentForm'), {
+	ssr: false,
+	loading: () => <CommentFormSkeleton />,
+});
 
 interface IProps {
 	params: { id: string };
@@ -32,6 +38,8 @@ const IssueDetailPage = async ({ params }: IProps) => {
 				<IssueDetails issue={issue} />
 				<Separator className='w-full' />
 				<Comments comments={issue.comments} />
+				<Separator className='w-full' />
+				<CommentForm />
 			</Flex>
 			{session && (
 				<Box>
