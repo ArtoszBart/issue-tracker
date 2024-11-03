@@ -1,5 +1,5 @@
 import { getIssue } from '@/repository/issueRepository';
-import { Box, Flex, Grid } from '@radix-ui/themes';
+import { Box, Flex, Grid, Separator } from '@radix-ui/themes';
 import { notFound } from 'next/navigation';
 import EditIssueButton from '@/components/EditIssueButton';
 import IssueDetails from '@/components/IssueDetails';
@@ -9,6 +9,7 @@ import authOptions from '@/auth/authOptions';
 import AssigneeSelect from '@/components/AssigneeSelect/AssigneeSelect';
 import { cache } from 'react';
 import { StatusSelect } from '@/components/StatusSelect';
+import Comments from '@/components/Comments';
 
 interface IProps {
 	params: { id: string };
@@ -27,9 +28,11 @@ const IssueDetailPage = async ({ params }: IProps) => {
 
 	return (
 		<Grid columns={{ initial: '1', sm: '5' }} gap='5'>
-			<Box className='md:col-span-4'>
+			<Flex className='md:col-span-4' direction='column' gap='6'>
 				<IssueDetails issue={issue} />
-			</Box>
+				<Separator className='w-full' />
+				<Comments comments={issue.comments} />
+			</Flex>
 			{session && (
 				<Box>
 					<Flex direction='column' gap='4'>

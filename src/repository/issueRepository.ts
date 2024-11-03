@@ -50,6 +50,12 @@ export async function getIssue(id: number): Promise<IIssue | null> {
 		where: {
 			id,
 		},
+		include: {
+			comments: {
+				orderBy: { createdAt: 'asc' },
+				include: { author: true },
+			},
+		},
 	});
 }
 
