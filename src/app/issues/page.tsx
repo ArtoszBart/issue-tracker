@@ -1,4 +1,5 @@
 import { IssuesToolbar } from '@/components';
+import IssuePageSizeSelector from '@/components/IssuePageSizeSelector';
 import IssueTable, { IIssueQuery } from '@/components/IssueTable/IssueTable';
 import { columnNames } from '@/components/IssueTable/columnDefinitions';
 import Pagination from '@/components/Pagination';
@@ -39,11 +40,17 @@ const IssuesPage = async ({ searchParams }: IProps) => {
 		<Flex direction='column' gap='3'>
 			<IssuesToolbar />
 			<IssueTable searchParams={searchParams} issues={issues} />
-			<Pagination
-				pageSize={pageSize}
-				currentPage={page}
-				itemCount={issueCount}
-			/>
+			<Flex
+				gap='3'
+				className='flex-col items-center md:flex-row md:items-start'
+			>
+				<Pagination
+					pageSize={pageSize}
+					currentPage={page}
+					itemCount={issueCount}
+				/>
+				<IssuePageSizeSelector />
+			</Flex>
 		</Flex>
 	);
 };

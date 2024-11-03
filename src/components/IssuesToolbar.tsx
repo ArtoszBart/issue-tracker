@@ -8,7 +8,6 @@ const IssuesToolbar = () => {
 		<Flex justify='between'>
 			<Box className='space-x-2'>
 				<IssueStatusFilter />
-				<IssuePageSizeSelector />
 			</Box>
 			<Button>
 				<Link href='/issues/new'>New Issue</Link>
