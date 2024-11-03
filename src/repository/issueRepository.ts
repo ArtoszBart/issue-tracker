@@ -67,6 +67,7 @@ export async function updateIssue(
 			title: issue.title,
 			description: issue.description,
 			assignedToUserId: issue.assignedToUserId,
+			status: issue.status,
 		},
 	});
 }

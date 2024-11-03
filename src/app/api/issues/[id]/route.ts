@@ -1,5 +1,6 @@
 import authOptions from '@/auth/authOptions';
 import { patchIssueSchema } from '@/models/issue';
+import { Status } from '@/models/status';
 import {
 	deleteIssue,
 	getIssue,
@@ -22,6 +23,16 @@ export async function PATCH(request: NextRequest, { params }: IProps) {
 	const validation = patchIssueSchema.safeParse(body);
 	if (!validation.success)
 		return NextResponse.json(validation.error.format(), { status: 400 });
+
+	const { status } = body;
+	if (status) {
+		const statuses = Object.keys(Status);
+		if (!statuses.includes(status))
+			return NextResponse.json(
+				{ error: 'Invalid status' },
+				{ status: 400 }
+			);
+	}
 
 	const { assignedToUserId } = body;
 	if (assignedToUserId) {

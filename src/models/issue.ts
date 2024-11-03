@@ -20,6 +20,7 @@ export const patchIssueSchema = z.object({
 		.max(255)
 		.optional()
 		.nullable(),
+	status: z.enum(Object.values(Status) as [Status, ...Status[]]).optional(),
 });
 
 export type NewIssue = z.infer<typeof issueSchema>;
