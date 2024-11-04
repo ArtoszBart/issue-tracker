@@ -2,18 +2,14 @@
 
 import ErrorPageComponent from '@/components/ErrorPageComponent';
 import { Button } from '@radix-ui/themes';
-import * as Sentry from '@sentry/nextjs';
-import { useEffect } from 'react';
 
 interface IProps {
 	error: Error;
 	reset: () => void;
 }
 
-export default function GlobalErrorPage({ error, reset }: IProps) {
-	useEffect(() => {
-		Sentry.captureException(error);
-	}, [error]);
+const ErrorPage = ({ error, reset }: IProps) => {
+	console.log('Error:', error);
 
 	return (
 		<ErrorPageComponent
@@ -23,4 +19,6 @@ export default function GlobalErrorPage({ error, reset }: IProps) {
 			<Button onClick={reset}>Retry</Button>
 		</ErrorPageComponent>
 	);
-}
+};
+
+export default ErrorPage;

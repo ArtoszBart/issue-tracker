@@ -19,3 +19,10 @@ body {
 .bugged-skeleton .react-loading-skeleton {
 	line-height: 2 !important;
 }
+
+.rt-Container, .rt-ContainerInner {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+}
