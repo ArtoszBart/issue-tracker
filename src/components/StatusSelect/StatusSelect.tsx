@@ -1,7 +1,7 @@
 'use client';
 
 import { Select } from '@radix-ui/themes';
-import { IssueStatusBadge, Skeleton } from '@/components';
+import { IssueStatusBadge } from '@/components';
 import IIssue from '@/models/issue';
 import { Toaster } from 'react-hot-toast';
 import useStatusSelect from './useStatusSelect';

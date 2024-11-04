@@ -5,7 +5,7 @@ import { Status } from '@/models/status';
 interface IIssuesMods {
 	status?: Status;
 	assignedToUserId?: string;
-	orderBy?: {};
+	orderBy?: { [issueField: string]: string };
 	skip?: number;
 	take?: number;
 	assignedToUser?: boolean;

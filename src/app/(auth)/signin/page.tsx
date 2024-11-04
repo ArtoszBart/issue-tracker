@@ -18,7 +18,7 @@ const page = async () => {
 			<div className='w-full max-w-xs center justify-stretch text-center space-y-8'>
 				<CredentialsForm />
 				<Link href='/' className='text-xs'>
-					Don't have an account? Create one here.
+					Don&apos;t have an account? Create one here.
 				</Link>
 				<hr className='border-neutral-500 overflow-visible before:content-["or"] before:text-neutral-500 before:relative before:-top-3.5 before:bg-white before:px-2' />
 				<div className='space-y-3'>

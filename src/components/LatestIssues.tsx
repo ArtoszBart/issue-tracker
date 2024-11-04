@@ -3,6 +3,7 @@ import { Avatar, Card, Flex, Heading, Table } from '@radix-ui/themes';
 import React from 'react';
 import Link from 'next/link';
 import IssueStatusBadge from './IssueStatusBadge';
+import PlaceholderImage from '@/assets/placeholder.png';
 
 const LatestIssues = async () => {
 	const issues = await getIssues({ take: 5, assignedToUser: true });
@@ -32,7 +33,10 @@ const LatestIssues = async () => {
 									</Flex>
 									{issue.assignedToUserId && (
 										<Avatar
-											src={issue.assignedToUser?.image!}
+											src={
+												issue.assignedToUser!.image! ||
+												PlaceholderImage.src
+											}
 											fallback='?'
 											size='2'
 											radius='full'

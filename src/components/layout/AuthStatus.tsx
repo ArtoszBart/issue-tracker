@@ -20,11 +20,7 @@ const AuthStatus = () => {
 			<DropdownMenu.Root>
 				<DropdownMenu.Trigger>
 					<Avatar
-						src={
-							session!.user!.image
-								? session!.user!.image
-								: PlaceholderImage.src
-						}
+						src={session!.user!.image || PlaceholderImage.src}
 						fallback=''
 						radius='full'
 						className='cursor-pointer'
