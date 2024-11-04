@@ -1,11 +1,11 @@
-import IComment from '@/models/comment';
+import { ICommentUser } from '@/models/comment';
 import { getStringDate } from '@/utils/dateTime';
 import { Avatar, Box, Card, Flex, Text } from '@radix-ui/themes';
 import ExpandableText from './ExpandableText';
 import PlaceholderImage from '@/assets/placeholder.png';
 
 interface IProps {
-	comment: IComment;
+	comment: ICommentUser;
 }
 
 const Comment = ({ comment }: IProps) => {

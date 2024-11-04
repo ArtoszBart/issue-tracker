@@ -1,22 +1,22 @@
-import IComment from '@/models/comment';
+import { ICommentUser } from '@/models/comment';
 import { Heading, Box } from '@radix-ui/themes';
 import Comment from './Comment';
 
 interface IProps {
-	comments: IComment[] | undefined;
+	comments: ICommentUser[] | undefined;
 }
 
-const Comments = ({ comments }: IProps) => {
+const IssueComments = ({ comments }: IProps) => {
 	return (
 		<Box className='space-y-5'>
 			<Heading size='4' as='h2'>
 				Comments
 			</Heading>
 			{comments?.map((comment) => (
-				<Comment comment={comment} />
+				<Comment key={comment.id} comment={comment} />
 			))}
 		</Box>
 	);
 };
 
-export default Comments;
+export default IssueComments;

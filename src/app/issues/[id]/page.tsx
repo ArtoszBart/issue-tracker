@@ -9,7 +9,7 @@ import authOptions from '@/auth/authOptions';
 import AssigneeSelect from '@/components/AssigneeSelect/AssigneeSelect';
 import { cache } from 'react';
 import { StatusSelect } from '@/components/StatusSelect';
-import Comments from '@/components/Comments';
+import Comments from '@/components/IssueComments';
 import dynamic from 'next/dynamic';
 import CommentFormSkeleton from '@/components/forms/CommentFormSkeleton';
 const CommentForm = dynamic(() => import('@/components/CommentForm'), {
@@ -39,7 +39,7 @@ const IssueDetailPage = async ({ params }: IProps) => {
 				<Separator className='w-full' />
 				<Comments comments={issue.comments} />
 				<Separator className='w-full' />
-				<CommentForm />
+				{session && <CommentForm issueId={issue.id} />}
 			</Flex>
 			{session && (
 				<Box>
@@ -56,6 +56,8 @@ const IssueDetailPage = async ({ params }: IProps) => {
 };
 
 export async function generateMetadata({ params }: IProps) {
+	const id = Number(params.id);
+	if (isNaN(id)) return;
 	const issue = await fetchIssue(Number(params.id));
 
 	return {

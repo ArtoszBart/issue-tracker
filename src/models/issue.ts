@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { Status } from './status';
 import User from '@/models/user';
-import IComment from './comment';
+import { ICommentUser } from './comment';
 
 export const issueSchema = z.object({
 	title: z.string().min(1, 'Title is required').max(255),
@@ -33,5 +33,5 @@ export default interface IIssue extends PatchIssue {
 	createdAt: Date;
 	updatedAt: Date;
 	assignedToUser?: User | null;
-	comments?: IComment[];
+	comments?: ICommentUser[];
 }
