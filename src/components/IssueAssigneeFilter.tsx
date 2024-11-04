@@ -17,7 +17,7 @@ const IssueAssigneeFilter = () => {
 
 	return (
 		<Select.Root
-			defaultValue={searchParams.get('status') || ''}
+			value={searchParams.get('assignedTo') || ''}
 			onValueChange={(userId) => {
 				const params = new URLSearchParams();
 				if (userId && userId !== 'none')

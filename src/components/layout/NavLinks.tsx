@@ -18,7 +18,6 @@ const NavLinks = () => {
 						className={classNames({
 							'nav-link': true,
 							'!text-zinc-900': link.href === currentPath,
-							'pointer-events-none': link.href === currentPath,
 						})}
 					>
 						{link.label}
