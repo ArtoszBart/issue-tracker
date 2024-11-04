@@ -12,8 +12,10 @@ const Comment = ({ comment }: IProps) => {
 	return (
 		<Box>
 			<Text className='text-sm'>
-				{comment.author.name || 'Unknown user'} commented on{' '}
-				{getStringDate(comment.createdAt)}
+				<Text className='font-semibold'>
+					{comment.author.name || 'Unknown user'}
+				</Text>{' '}
+				commented on {getStringDate(comment.createdAt)}
 			</Text>
 			<Flex className='w-full gap-4'>
 				<Box className='pt-2.5'>
