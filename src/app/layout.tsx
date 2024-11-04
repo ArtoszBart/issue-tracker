@@ -6,6 +6,7 @@ import NavBar from '@/components/layout/NavBar';
 import { Container, Theme } from '@radix-ui/themes';
 import AuthProvider from '@/auth/Provider';
 import QueryClientProvider from '@/config/QueryClientProvider';
+import Footer from '@/components/layout/Footer';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
@@ -24,11 +25,15 @@ export default function RootLayout({
 			<body className={inter.variable}>
 				<QueryClientProvider>
 					<AuthProvider>
-						<Theme accentColor='violet'>
+						<Theme
+							accentColor='violet'
+							className={`${inter.variable} min-h-screen flex flex-col`}
+						>
 							<NavBar />
-							<main className='p-5'>
+							<main className='p-5 flex-1'>
 								<Container>{children}</Container>
 							</main>
+							<Footer />
 						</Theme>
 					</AuthProvider>
 				</QueryClientProvider>
