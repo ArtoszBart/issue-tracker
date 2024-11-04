@@ -38,6 +38,9 @@ const IssueAssigneeFilter = () => {
 		>
 			<Select.Trigger placeholder='Filter by assignee...' />
 			<Select.Content>
+				<Select.Item key={'all'} value={'none'}>
+					All
+				</Select.Item>
 				{users?.map((user) => (
 					<Select.Item key={user.id} value={user.id}>
 						{user.name}
