@@ -5,7 +5,7 @@ import { Table } from '@radix-ui/themes';
 import NextLink from 'next/link';
 import IssueStatusBadge from '../IssueStatusBadge';
 import Link from '../Link';
-import { columns } from './columnDefinitions';
+import { columns, ITableColumn } from './columnDefinitions';
 
 export interface IIssueQuery {
 	status: Status;
@@ -22,6 +22,24 @@ interface IProps {
 }
 
 const IssueTable = ({ searchParams, issues }: IProps) => {
+	const getHref = (column: ITableColumn) => {
+		const orderBy = column.value;
+		const sort =
+			column.value !== searchParams.orderBy
+				? 'asc'
+				: searchParams.sort === 'desc'
+				? 'asc'
+				: 'desc';
+
+		return {
+			query: {
+				...searchParams,
+				orderBy,
+				sort,
+			},
+		};
+	};
+
 	return (
 		<Table.Root variant='surface'>
 			<Table.Header>
@@ -31,21 +49,7 @@ const IssueTable = ({ searchParams, issues }: IProps) => {
 							key={column.value}
 							className={column.className}
 						>
-							<NextLink
-								href={{
-									query: {
-										...searchParams,
-										orderBy: column.value,
-										sort:
-											column.value !==
-											searchParams.orderBy
-												? 'asc'
-												: searchParams.sort === 'desc'
-												? 'asc'
-												: 'desc',
-									},
-								}}
-							>
+							<NextLink href={getHref(column)}>
 								{column.label}
 								{column.value === searchParams.orderBy &&
 									(searchParams.sort === 'asc' ? (

@@ -1,6 +1,6 @@
 import IIssue from '@/models/issue';
 
-interface ITableColumn {
+export interface ITableColumn {
 	label: string;
 	value: keyof IIssue;
 	className?: string;
