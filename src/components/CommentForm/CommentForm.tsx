@@ -1,13 +1,12 @@
 'use client';
 
-import 'easymde/dist/easymde.min.css';
 import { Avatar, Box, Button, Flex, Heading } from '@radix-ui/themes';
 import PlaceholderImage from '@/assets/placeholder.png';
 import { Controller } from 'react-hook-form';
 import ErrorMessage from '@/components/forms/ErrorMessage';
 import { Spinner } from '@/components';
-import SimpleMDE from 'react-simplemde-editor';
 import useCommentForm from './useCommentForm';
+import MDEditor from '../MDEditor';
 
 interface IProps {
 	issueId: number;
@@ -39,7 +38,7 @@ const CommentForm = ({ issueId }: IProps) => {
 							control={hook.control}
 							defaultValue=''
 							render={({ field }) => (
-								<SimpleMDE
+								<MDEditor
 									options={hook.mdeOptions}
 									placeholder='Add your comment here...'
 									{...field}

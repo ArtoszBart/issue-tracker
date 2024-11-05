@@ -1,6 +1,5 @@
 'use client';
 
-import 'easymde/dist/easymde.min.css';
 import { Button, Callout, TextField } from '@radix-ui/themes';
 import { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
@@ -10,7 +9,7 @@ import IIssue, { NewIssue, issueSchema } from '@/models/issue';
 import { zodResolver } from '@hookform/resolvers/zod';
 import ErrorMessage from '@/components/forms/ErrorMessage';
 import { Spinner } from '@/components';
-import SimpleMDE from 'react-simplemde-editor';
+import MDEditor from '../MDEditor';
 
 interface IProps {
 	issue?: IIssue;
@@ -65,7 +64,7 @@ const IssueForm = ({ issue }: IProps) => {
 					control={control}
 					defaultValue={issue?.description}
 					render={({ field }) => (
-						<SimpleMDE placeholder='Description' {...field} />
+						<MDEditor placeholder='Description' {...field} />
 					)}
 				/>
 				<ErrorMessage message={errors.description?.message} />
