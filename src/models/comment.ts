@@ -1,6 +1,6 @@
 import { Comment } from '@prisma/client';
-import User from './user';
 import { z } from 'zod';
+import User from './user';
 
 export const newCommentFormSchema = z.object({
 	content: z
@@ -15,9 +15,10 @@ export const newCommentServerSchema = newCommentFormSchema.extend({
 });
 
 export type NewCommentForm = z.infer<typeof newCommentFormSchema>;
-export type NewComment = z.infer<typeof newCommentServerSchema>;
+export type NewCommentServer = z.infer<typeof newCommentServerSchema>;
 
 export type { Comment as default };
-export interface ICommentUser extends Comment {
+
+export type CommentWithUser = Comment & {
 	author: User;
-}
+};

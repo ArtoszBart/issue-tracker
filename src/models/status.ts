@@ -1,7 +1,3 @@
-export type Status = 'OPEN' | 'IN_PROGRESS' | 'CLOSED';
+import { Status } from '@prisma/client';
 
-export const Status = {
-	OPEN: 'OPEN',
-	IN_PROGRESS: 'IN_PROGRESS',
-	CLOSED: 'CLOSED',
-};
+export default Status;

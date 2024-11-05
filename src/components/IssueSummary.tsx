@@ -1,4 +1,4 @@
-import { Status } from '@/models/status';
+import Status from '@/models/status';
 import { Card, Flex, Text } from '@radix-ui/themes';
 import Link from 'next/link';
 

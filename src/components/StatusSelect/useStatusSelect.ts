@@ -1,10 +1,10 @@
-import IIssue from '@/models/issue';
+import Issue from '@/models/issue';
+import Status from '@/models/status';
 import axios from 'axios';
-import toast from 'react-hot-toast';
-import { Status } from '@prisma/client';
 import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 
-const useStatusSelect = (issue: IIssue) => {
+const useStatusSelect = (issue: Issue) => {
 	const statuses = Object.keys(Status) as Status[];
 	const router = useRouter();
 

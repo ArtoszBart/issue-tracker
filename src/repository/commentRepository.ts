@@ -1,7 +1,9 @@
 import prisma from '@/config/prismaClient';
-import Comment, { NewComment } from '@/models/comment';
+import Comment, { NewCommentServer } from '@/models/comment';
 
-export async function createComment(comment: NewComment): Promise<Comment> {
+export async function createComment(
+	comment: NewCommentServer
+): Promise<Comment> {
 	return await prisma.comment.create({
 		data: {
 			content: comment.content,

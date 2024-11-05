@@ -1,16 +1,16 @@
-import { TriangleUpIcon, TriangleDownIcon } from '@radix-ui/react-icons';
+import Issue from '@/models/issue';
+import Status from '@/models/status';
+import { TriangleDownIcon, TriangleUpIcon } from '@radix-ui/react-icons';
 import { Table } from '@radix-ui/themes';
-import Link from '../Link';
 import NextLink from 'next/link';
 import IssueStatusBadge from '../IssueStatusBadge';
-import IIssue from '@/models/issue';
-import { Status } from '@/models/status';
+import Link from '../Link';
 import { columns } from './columnDefinitions';
 
 export interface IIssueQuery {
 	status: Status;
 	assignedTo: string;
-	orderBy: keyof IIssue;
+	orderBy: keyof Issue;
 	sort: 'asc' | 'desc';
 	page: string;
 	pageSize: string;
@@ -18,7 +18,7 @@ export interface IIssueQuery {
 
 interface IProps {
 	searchParams: IIssueQuery;
-	issues: IIssue[];
+	issues: Issue[];
 }
 
 const IssueTable = ({ searchParams, issues }: IProps) => {

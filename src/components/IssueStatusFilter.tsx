@@ -1,6 +1,6 @@
 'use client';
 
-import { Status } from '@/models/status';
+import Status from '@/models/status';
 import { Select } from '@radix-ui/themes';
 import { useRouter, useSearchParams } from 'next/navigation';
 

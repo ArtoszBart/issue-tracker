@@ -1,6 +1,6 @@
 import authOptions from '@/auth/authOptions';
 import { patchIssueSchema } from '@/models/issue';
-import { Status } from '@/models/status';
+import Status from '@/models/status';
 import {
 	deleteIssue,
 	getIssue,

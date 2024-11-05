@@ -1,9 +1,9 @@
-import { ICommentUser } from '@/models/comment';
-import { Heading, Box } from '@radix-ui/themes';
+import { CommentWithUser } from '@/models/comment';
+import { Box, Heading } from '@radix-ui/themes';
 import Comment from './Comment';
 
 interface IProps {
-	comments: ICommentUser[] | undefined;
+	comments: CommentWithUser[] | undefined;
 }
 
 const IssueComments = ({ comments }: IProps) => {

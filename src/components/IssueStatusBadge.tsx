@@ -1,4 +1,4 @@
-import { Status } from '@/models/status';
+import Status from '@/models/status';
 import { Badge } from '@radix-ui/themes';
 
 interface IProps {

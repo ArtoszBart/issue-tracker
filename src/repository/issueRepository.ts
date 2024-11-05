@@ -1,6 +1,6 @@
 import prisma from '@/config/prismaClient';
-import IIssue, { NewIssue, PatchIssue } from '@/models/issue';
-import { Status } from '@/models/status';
+import Issue, { NewIssue, PatchIssue } from '@/models/issue';
+import Status from '@/models/status';
 
 interface IIssuesMods {
 	status?: Status;
@@ -18,7 +18,7 @@ export async function getIssues({
 	skip,
 	take,
 	assignedToUser,
-}: IIssuesMods = {}): Promise<IIssue[]> {
+}: IIssuesMods = {}): Promise<Issue[]> {
 	return await prisma.issue.findMany({
 		orderBy,
 		skip,
@@ -45,7 +45,7 @@ export async function getIssueCount({
 	});
 }
 
-export async function getIssue(id: number): Promise<IIssue | null> {
+export async function getIssue(id: number): Promise<Issue | null> {
 	return await prisma.issue.findUnique({
 		where: {
 			id,
@@ -59,7 +59,7 @@ export async function getIssue(id: number): Promise<IIssue | null> {
 	});
 }
 
-export async function createIssue(issue: NewIssue): Promise<IIssue> {
+export async function createIssue(issue: NewIssue): Promise<Issue> {
 	return await prisma.issue.create({
 		data: {
 			title: issue.title,
@@ -71,7 +71,7 @@ export async function createIssue(issue: NewIssue): Promise<IIssue> {
 export async function updateIssue(
 	id: number,
 	issue: PatchIssue
-): Promise<IIssue> {
+): Promise<Issue> {
 	return await prisma.issue.update({
 		where: { id },
 		data: {
@@ -83,7 +83,7 @@ export async function updateIssue(
 	});
 }
 
-export async function deleteIssue(id: number): Promise<IIssue> {
+export async function deleteIssue(id: number): Promise<Issue> {
 	return await prisma.issue.delete({
 		where: {
 			id,

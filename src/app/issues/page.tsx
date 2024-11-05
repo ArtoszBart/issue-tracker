@@ -3,8 +3,8 @@ import IssuePageSizeSelector from '@/components/IssuePageSizeSelector';
 import IssueTable, { IIssueQuery } from '@/components/IssueTable/IssueTable';
 import { columnNames } from '@/components/IssueTable/columnDefinitions';
 import Pagination from '@/components/Pagination';
-import { Status } from '@/models/status';
-import { getIssues, getIssueCount } from '@/repository/issueRepository';
+import Status from '@/models/status';
+import { getIssueCount, getIssues } from '@/repository/issueRepository';
 import { Flex } from '@radix-ui/themes';
 import { Metadata } from 'next';
 
