@@ -26,3 +26,10 @@ body {
 	flex-direction: column;
 	flex: 1;
 }
+
+.radix-themes {
+	--cursor-button: pointer;
+	--cursor-link: pointer;
+	--cursor-menu-item: pointer;
+	--cursor-select: pointer;
+}

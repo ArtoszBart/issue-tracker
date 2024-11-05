@@ -26,19 +26,21 @@ const IssueSummary = ({ data: { open, inProgress, closed } }: IProps) => {
 	return (
 		<Flex gap='4'>
 			{containers.map((container) => (
-				<Card key={container.label}>
-					<Flex direction='column' gap='1'>
-						<Link
-							href={`/issues?status=${container.status}`}
-							className='text-sm font-medium'
-						>
-							{container.label}
-						</Link>
-						<Text size='5' className='font-bold'>
-							{container.value}
-						</Text>
-					</Flex>
-				</Card>
+				<Link
+					href={`/issues?status=${container.status}`}
+					key={container.label}
+				>
+					<Card className='hover:bg-light-hover transition-colors duration-300'>
+						<Flex direction='column' gap='1'>
+							<Text className='text-sm font-medium'>
+								{container.label}
+							</Text>
+							<Text size='5' className='font-bold'>
+								{container.value}
+							</Text>
+						</Flex>
+					</Card>
+				</Link>
 			))}
 		</Flex>
 	);
