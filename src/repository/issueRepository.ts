@@ -1,5 +1,5 @@
 import prisma from '@/config/prismaClient';
-import Issue, { NewIssue, PatchIssue } from '@/models/issue';
+import Issue, { IssueWithComments, NewIssue, PatchIssue } from '@/models/issue';
 import Status from '@/models/status';
 
 interface IIssuesMods {
@@ -45,7 +45,7 @@ export async function getIssueCount({
 	});
 }
 
-export async function getIssue(id: number): Promise<Issue | null> {
+export async function getIssue(id: number): Promise<IssueWithComments | null> {
 	return await prisma.issue.findUnique({
 		where: {
 			id,

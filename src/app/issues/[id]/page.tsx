@@ -39,7 +39,7 @@ const IssueDetailPage = async ({ params }: IProps) => {
 				<Separator className='w-full' />
 				<Comments comments={issue.comments} />
 				<Separator className='w-full' />
-				{session && <CommentForm issueId={issue.id} />}
+				<CommentForm issueId={issue.id} />
 			</Flex>
 			{session && (
 				<Box>

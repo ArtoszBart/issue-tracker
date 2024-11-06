@@ -36,4 +36,8 @@ export type Issue = PatchIssue & {
 	comments?: CommentWithUser[];
 };
 
+export type IssueWithComments = Issue & {
+	comments: CommentWithUser[];
+};
+
 export type { Issue as default };
