@@ -45,7 +45,7 @@ const useSignUpForm = () => {
 
 			await axios.post('/api/users', data);
 
-			router.push('/');
+			router.push('/registration-confirmation');
 		} catch (error) {
 			setIsSubmitting(false);
 			setError('An unexpected error occured.');
