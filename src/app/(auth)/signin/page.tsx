@@ -14,7 +14,7 @@ const page = async () => {
 
 	return (
 		<div className='flex flex-col items-center justify-center gap-5'>
-			<Heading>Log in</Heading>
+			<Heading>Sign in</Heading>
 			<div className='w-full max-w-xs center justify-stretch text-center space-y-8'>
 				<CredentialsForm />
 				<Link href='/' className='text-xs'>

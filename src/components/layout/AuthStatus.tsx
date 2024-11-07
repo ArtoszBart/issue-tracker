@@ -11,7 +11,7 @@ const AuthStatus = () => {
 	if (status === 'unauthenticated')
 		return (
 			<Link className='nav-link' href='/api/auth/signin'>
-				Log in
+				Sign in
 			</Link>
 		);
 
