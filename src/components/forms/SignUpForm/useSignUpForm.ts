@@ -1,9 +1,12 @@
 import { NewUser, newUserSchema, passwordGuidelines } from '@/models/user';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { ChangeEvent, useEffect, useState } from 'react';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
+import { ChangeEvent, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 const useSignUpForm = () => {
+	const router = useRouter();
 	const [error, setError] = useState('');
 	const [passwordContent, setPasswordContent] = useState<string[]>([]);
 	const [isSubmitting, setIsSubmitting] = useState(false);
@@ -37,7 +40,17 @@ const useSignUpForm = () => {
 	};
 
 	const onSubmit = handleSubmit(async (data) => {
-		console.log(data);
+		try {
+			setIsSubmitting(true);
+
+			await axios.post('/api/users', data);
+
+			router.push('/');
+		} catch (error) {
+			setIsSubmitting(false);
+			setError('An unexpected error occured.');
+			console.error(error);
+		}
 	});
 
 	return {
