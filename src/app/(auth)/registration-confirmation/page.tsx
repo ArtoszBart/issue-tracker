@@ -1,4 +1,5 @@
 import { Link } from '@/components';
+import LinkButton from '@/components/LinkButton';
 import { Heading, Text } from '@radix-ui/themes';
 
 const RegistrationConfirmationPage = () => {
@@ -14,6 +15,7 @@ const RegistrationConfirmationPage = () => {
 				Didn&apos;t receive the email?{' '}
 				<Link href='/resend-activation'>Resend Activation Email</Link>
 			</Text>
+			<LinkButton href='/api/auth/signin'>Sign in</LinkButton>
 		</div>
 	);
 };
