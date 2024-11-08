@@ -1,4 +1,5 @@
 import bcrypt from 'bcrypt';
+import crypto from 'crypto';
 
 export const hashPassword = async (password: string) => {
 	const salt = await bcrypt.genSalt(Number(process.env.HASH_ROUNDS));
@@ -12,4 +13,8 @@ export const comparePassword = async (
 ) => {
 	const result = await bcrypt.compare(password, hashedPassword);
 	return result;
+};
+
+export const generateActivationToken = (): string => {
+	return crypto.randomBytes(32).toString('hex');
 };

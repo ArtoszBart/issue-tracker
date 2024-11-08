@@ -1,6 +1,6 @@
 import { getEmailVariants } from '@/emails/accountActivation';
 import sendEmail from '@/emails/resendClient';
-import { NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
 	const body = await request.json();
@@ -10,8 +10,8 @@ export async function POST(request: NextRequest) {
 			...getEmailVariants(body.name),
 		});
 
-		return Response.json(data);
+		return NextResponse.json(data);
 	} catch (error) {
-		return Response.json({ error }, { status: 500 });
+		return NextResponse.json({ error }, { status: 500 });
 	}
 }
