@@ -1,14 +1,12 @@
 'use client';
 
-import { Link, Spinner } from '@/components';
+import { Spinner } from '@/components';
 import LinkButton from '@/components/LinkButton';
-import { updateUser } from '@/repository/userRepository';
 import { Heading, Text } from '@radix-ui/themes';
 import axios from 'axios';
 import { redirect } from 'next/navigation';
 import { useState } from 'react';
-import toast from 'react-hot-toast';
-import { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 
 interface IProps {
 	searchParams: { id: string };
