@@ -1,10 +1,35 @@
-import { Link } from '@/components';
-import LinkButton from '@/components/LinkButton';
-import { Heading, Text } from '@radix-ui/themes';
+'use client';
 
-const RegistrationConfirmationPage = () => {
+import { Link, Spinner } from '@/components';
+import LinkButton from '@/components/LinkButton';
+import { updateUser } from '@/repository/userRepository';
+import { Heading, Text } from '@radix-ui/themes';
+import axios from 'axios';
+import { redirect } from 'next/navigation';
+import { useState } from 'react';
+import toast from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
+
+interface IProps {
+	searchParams: { id: string };
+}
+
+const RegistrationConfirmationPage = ({ searchParams }: IProps) => {
+	if (!searchParams.id) redirect('/');
+
+	const [isResending, setIsResending] = useState(false);
+
+	const resendEmail = () => {
+		setIsResending(true);
+		axios
+			.patch('/api/auth/resend-activation', { id: searchParams.id })
+			.then(() => toast.success('Activation email has been resent'))
+			.catch(() => toast.error('Error resending activation email'))
+			.finally(() => setIsResending(false));
+	};
+
 	return (
-		<div className='flex flex-col items-center justify-center gap-5'>
+		<div className='flex flex-col items-center justify-center gap-5 text-center'>
 			<Heading>Registration Successful!</Heading>
 			<Text>
 				Thank you for registering. Please check your email inbox to
@@ -13,9 +38,16 @@ const RegistrationConfirmationPage = () => {
 			</Text>
 			<Text>
 				Didn&apos;t receive the email?{' '}
-				<Link href='/resend-activation'>Resend Activation Email</Link>
+				<Text
+					className='text-accent hover:underline cursor-pointer'
+					onClick={resendEmail}
+				>
+					Resend Activation Email
+				</Text>{' '}
+				{isResending && <Spinner />}
 			</Text>
 			<LinkButton href='/api/auth/signin'>Sign in</LinkButton>
+			<Toaster />
 		</div>
 	);
 };

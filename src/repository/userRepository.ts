@@ -1,5 +1,5 @@
 import prisma from '@/config/prismaClient';
-import User, { NewUser } from '@/models/user';
+import User, { FinalNewUser, UserActivation } from '@/models/user';
 
 export async function getUsers(): Promise<User[]> {
 	return await prisma.user.findMany({
@@ -25,12 +25,27 @@ export async function getUserByEmail(email: string): Promise<User | null> {
 	});
 }
 
-export async function createUser(user: NewUser): Promise<User> {
+export async function createUser(user: FinalNewUser): Promise<User> {
 	return await prisma.user.create({
 		data: {
 			name: user.name,
 			email: user.email,
 			hashedPassword: user.password,
+			activationToken: user.activationToken,
+			activationTokenExpiry: user.activationTokenExpiry,
+		},
+	});
+}
+
+export async function updateUser(
+	id: string,
+	user: UserActivation
+): Promise<User> {
+	return await prisma.user.update({
+		where: { id },
+		data: {
+			activationToken: user.activationToken,
+			activationTokenExpiry: user.activationTokenExpiry,
 		},
 	});
 }

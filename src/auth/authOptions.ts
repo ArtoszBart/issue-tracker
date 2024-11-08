@@ -1,6 +1,6 @@
 import prisma from '@/config/prismaClient';
 import { getUserByEmail } from '@/repository/userRepository';
-import { comparePassword } from '@/utils/crypt';
+import { compareHashedData } from '@/utils/crypt';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
@@ -27,7 +27,7 @@ const authOptions: NextAuthOptions = {
 				const user = await getUserByEmail(credentials?.email);
 				if (!user) return null;
 
-				const passwordMatch = await comparePassword(
+				const passwordMatch = await compareHashedData(
 					credentials.password,
 					user.hashedPassword!
 				);

@@ -1,9 +1,11 @@
-const plainText = (name: string) => {
-	return `Hi ${name},
+import { IAccountActivationEmail } from '.';
+
+const plainText = (payload: IAccountActivationEmail) => {
+	return `Hi ${payload.name},
 
 		Thank you for signing up with Issue Tracker! To complete your registration and activate your account, please click the link below:
 
-		${process.env.BASE_URL}/TODO:${Math.random()}
+		${process.env.BASE_URL}/activate?email=${payload.email}&token=${payload.activationToken}
 
 		If the link doesn't work, you can copy and paste it into your browser.
 		Once your account is activated, you'll be able to log in and enjoy all the features of Issue Tracker.

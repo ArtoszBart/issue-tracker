@@ -8,12 +8,9 @@ import {
 	Tailwind,
 	Text,
 } from '@react-email/components';
+import { IAccountActivationEmail } from '.';
 
-interface IProps {
-	name: string;
-}
-
-const AccountActivation = ({ name }: IProps) => {
+const AccountActivation = (payload: IAccountActivationEmail) => {
 	return (
 		<Html lang='en'>
 			<Head>
@@ -32,16 +29,16 @@ const AccountActivation = ({ name }: IProps) => {
 			<Tailwind>
 				<Body className='bg-white'>
 					<Container>
-						<Text className='text-2xl font-bold'>Hi {name}</Text>
+						<Text className='text-2xl font-bold'>
+							Hi {payload.name}
+						</Text>
 						<Text className='text-base'>
 							Thank you for signing up with Issue Tracker! To
 							complete your registration and activate your
 							account, please click the button below:
 						</Text>
 						<Link
-							href={`${
-								process.env.BASE_URL
-							}/?TODO:${Math.random()}`}
+							href={`${process.env.BASE_URL}/activate?email=${payload.email}&token=${payload.activationToken}`}
 							className='bg-violet-500 text-white text-sm py-1.5 px-2 rounded-md'
 						>
 							Activate My Account
@@ -51,12 +48,10 @@ const AccountActivation = ({ name }: IProps) => {
 							into your browser:
 						</Text>
 						<Link
-							href={`${
-								process.env.BASE_URL
-							}/?TODO:${Math.random()}`}
+							href={`${process.env.BASE_URL}/activate?email=${payload.email}&token=${payload.activationToken}`}
 							className='text-violet-500 text-sm'
 						>
-							{`${process.env.BASE_URL}/?TODO:${Math.random()}`}
+							{`${process.env.BASE_URL}/activate?email=${payload.email}&token=${payload.activationToken}`}
 						</Link>
 						<Text className='text-base'>
 							Once your account is activated, you&apos;ll be able

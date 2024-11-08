@@ -47,4 +47,10 @@ export const newUserSchema = z
 	});
 
 export type NewUser = z.infer<typeof newUserSchema>;
+export type UserActivation = {
+	activationToken: string;
+	activationTokenExpiry: Date;
+};
+export type FinalNewUser = z.infer<typeof newUserSchema> & UserActivation;
+
 export type { User as default };

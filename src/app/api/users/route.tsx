@@ -1,6 +1,9 @@
-import { newUserSchema } from '@/models/user';
+import { getEmailVariants } from '@/emails/accountActivation';
+import sendEmail from '@/emails/resendClient';
+import { FinalNewUser, newUserSchema } from '@/models/user';
 import { createUser, getUsers } from '@/repository/userRepository';
-import { hashPassword } from '@/utils/crypt';
+import { generateActivationToken, hashData } from '@/utils/crypt';
+import moment from 'moment';
 import { NextRequest, NextResponse } from 'next/server';
 
 export const dynamic = 'force-dynamic';
@@ -18,9 +21,28 @@ export async function POST(request: NextRequest) {
 	if (!validation.success)
 		return NextResponse.json(validation.error.format(), { status: 400 });
 
-	body.password = await hashPassword(body.password);
+	const newUserData: FinalNewUser = {
+		...body,
+		password: await hashData(body.password),
+		activationToken: await hashData(generateActivationToken()),
+		activationTokenExpiry: moment(new Date()).add(15, 'm').toDate(),
+	};
 
-	const newUser = await createUser(body);
+	const newUser = await createUser(newUserData);
+	if (!newUser.id) return NextResponse.json({}, { status: 500 });
+
+	try {
+		await sendEmail({
+			email: newUser.email!,
+			...getEmailVariants({
+				name: newUser.name!,
+				email: newUser.email!,
+				activationToken: newUser.activationToken!,
+			}),
+		});
+	} catch (error) {
+		return NextResponse.json({ error }, { status: 500 });
+	}
 
 	return NextResponse.json(newUser, { status: 201 });
 }
