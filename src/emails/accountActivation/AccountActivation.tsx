@@ -43,6 +43,12 @@ const AccountActivation = (payload: IAccountActivationEmail) => {
 						>
 							Activate My Account
 						</Link>
+						<Text>
+							<b>**Please note:**</b> This activation link will be
+							active for only 15 minutes. If the link expires, you
+							can click it again, and you will be given the option
+							to request a new activation link.
+						</Text>
 						<Text className='text-base'>
 							If the button doesn't work, copy and paste this link
 							into your browser:
