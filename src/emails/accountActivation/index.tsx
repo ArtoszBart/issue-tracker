@@ -2,8 +2,8 @@ import AccountActivation from './AccountActivation';
 import plainText from './plainText';
 
 export interface IAccountActivationEmail {
+	id: string;
 	name: string;
-	email: string;
 	activationToken: string;
 }
 
@@ -13,7 +13,7 @@ export const getEmailVariants = (payload: IAccountActivationEmail) => {
 		react: (
 			<AccountActivation
 				name={payload.name}
-				email={payload.email}
+				id={payload.id}
 				activationToken={payload.activationToken}
 			/>
 		),

@@ -35,8 +35,8 @@ export async function POST(request: NextRequest) {
 		await sendEmail({
 			email: newUser.email!,
 			...getEmailVariants({
+				id: newUser.id!,
 				name: newUser.name!,
-				email: newUser.email!,
 				activationToken: newUser.activationToken!,
 			}),
 		});

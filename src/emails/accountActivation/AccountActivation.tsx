@@ -38,7 +38,7 @@ const AccountActivation = (payload: IAccountActivationEmail) => {
 							account, please click the button below:
 						</Text>
 						<Link
-							href={`${process.env.BASE_URL}/activate?email=${payload.email}&token=${payload.activationToken}`}
+							href={`${process.env.BASE_URL}/activation?id=${payload.id}&token=${payload.activationToken}`}
 							className='bg-violet-500 text-white text-sm py-1.5 px-2 rounded-md'
 						>
 							Activate My Account
@@ -48,10 +48,10 @@ const AccountActivation = (payload: IAccountActivationEmail) => {
 							into your browser:
 						</Text>
 						<Link
-							href={`${process.env.BASE_URL}/activate?email=${payload.email}&token=${payload.activationToken}`}
+							href={`${process.env.BASE_URL}/activation?id=${payload.id}&token=${payload.activationToken}`}
 							className='text-violet-500 text-sm'
 						>
-							{`${process.env.BASE_URL}/activate?email=${payload.email}&token=${payload.activationToken}`}
+							{`${process.env.BASE_URL}/activation?id=${payload.id}&token=${payload.activationToken}`}
 						</Link>
 						<Text className='text-base'>
 							Once your account is activated, you&apos;ll be able

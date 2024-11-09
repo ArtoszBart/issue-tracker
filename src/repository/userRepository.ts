@@ -37,7 +37,7 @@ export async function createUser(user: FinalNewUser): Promise<User> {
 	});
 }
 
-export async function updateUser(
+export async function updateActivationToken(
 	id: string,
 	user: UserActivation
 ): Promise<User> {
@@ -46,6 +46,17 @@ export async function updateUser(
 		data: {
 			activationToken: user.activationToken,
 			activationTokenExpiry: user.activationTokenExpiry,
+		},
+	});
+}
+
+export async function activateUser(id: string): Promise<User> {
+	return await prisma.user.update({
+		where: { id },
+		data: {
+			emailVerified: new Date(),
+			activationToken: null,
+			activationTokenExpiry: null,
 		},
 	});
 }

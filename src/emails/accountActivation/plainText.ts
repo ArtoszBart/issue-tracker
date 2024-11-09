@@ -5,7 +5,7 @@ const plainText = (payload: IAccountActivationEmail) => {
 
 		Thank you for signing up with Issue Tracker! To complete your registration and activate your account, please click the link below:
 
-		${process.env.BASE_URL}/activate?email=${payload.email}&token=${payload.activationToken}
+		${process.env.BASE_URL}/activation?id=${payload.id}&token=${payload.activationToken}
 
 		If the link doesn't work, you can copy and paste it into your browser.
 		Once your account is activated, you'll be able to log in and enjoy all the features of Issue Tracker.

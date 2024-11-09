@@ -1,6 +1,9 @@
 import { getEmailVariants } from '@/emails/accountActivation';
 import sendEmail from '@/emails/resendClient';
-import { getUserById, updateUser } from '@/repository/userRepository';
+import {
+	getUserById,
+	updateActivationToken,
+} from '@/repository/userRepository';
 import { generateActivationToken, hashData } from '@/utils/crypt';
 import moment from 'moment';
 import { NextRequest, NextResponse } from 'next/server';
@@ -12,7 +15,7 @@ export async function PATCH(request: NextRequest) {
 	if (!user)
 		return NextResponse.json({ error: 'Invalid user' }, { status: 404 });
 
-	const updatedUser = await updateUser(user.id, {
+	const updatedUser = await updateActivationToken(user.id, {
 		activationToken: await hashData(generateActivationToken()),
 		activationTokenExpiry: moment(new Date()).add(15, 'm').toDate(),
 	});
@@ -21,8 +24,8 @@ export async function PATCH(request: NextRequest) {
 		await sendEmail({
 			email: updatedUser.email!,
 			...getEmailVariants({
+				id: updatedUser.id!,
 				name: updatedUser.name!,
-				email: updatedUser.email!,
 				activationToken: updatedUser.activationToken!,
 			}),
 		});
