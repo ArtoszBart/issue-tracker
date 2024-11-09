@@ -15,7 +15,7 @@ export async function GET() {
 }
 
 export async function POST(request: NextRequest) {
-	const body = await request.json();
+	const body: FinalNewUser = await request.json();
 
 	const validation = newUserSchema.safeParse(body);
 	if (!validation.success)
@@ -23,6 +23,7 @@ export async function POST(request: NextRequest) {
 
 	const newUserData: FinalNewUser = {
 		...body,
+		email: body.email.toLowerCase(),
 		password: await hashData(body.password),
 		activationToken: await hashData(generateActivationToken()),
 		activationTokenExpiry: moment(new Date()).add(15, 'm').toDate(),

@@ -24,7 +24,9 @@ const authOptions: NextAuthOptions = {
 			async authorize(credentials) {
 				if (!credentials?.email || !credentials.password) return null;
 
-				const user = await getUserByEmail(credentials?.email);
+				const user = await getUserByEmail(
+					credentials?.email.toLowerCase()
+				);
 				if (!user) return null;
 
 				const passwordMatch = await compareHashedData(
