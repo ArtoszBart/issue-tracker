@@ -1,7 +1,6 @@
 import {
 	Body,
 	Container,
-	Head,
 	Html,
 	Link,
 	Preview,
@@ -13,18 +12,6 @@ import { IAccountActivationEmail } from '.';
 const AccountActivation = (payload: IAccountActivationEmail) => {
 	return (
 		<Html lang='en'>
-			<Head>
-				<link rel='preconnect' href='https://fonts.googleapis.com' />
-				<link
-					rel='preconnect'
-					href='https://fonts.gstatic.com'
-					crossOrigin='anonymous'
-				/>
-				<link
-					href='https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap'
-					rel='stylesheet'
-				/>
-			</Head>
 			<Preview>Welcome aboard!</Preview>
 			<Tailwind>
 				<Body className='bg-white'>
@@ -50,8 +37,8 @@ const AccountActivation = (payload: IAccountActivationEmail) => {
 							to request a new activation link.
 						</Text>
 						<Text className='text-base'>
-							If the button doesn't work, copy and paste this link
-							into your browser:
+							If the button doesn&apos;t work, copy and paste this
+							link into your browser:
 						</Text>
 						<Link
 							href={`${process.env.BASE_URL}/activation?id=${payload.id}&token=${payload.activationToken}`}
