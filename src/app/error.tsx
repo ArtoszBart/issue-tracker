@@ -2,6 +2,7 @@
 
 import ErrorPageComponent from '@/components/ErrorPageComponent';
 import { Button } from '@radix-ui/themes';
+import { Metadata } from 'next';
 
 interface IProps {
 	error: Error;
@@ -22,3 +23,8 @@ const ErrorPage = ({ error, reset }: IProps) => {
 };
 
 export default ErrorPage;
+
+export const metadata: Metadata = {
+	title: 'Issue Tracker - Unexpected Error',
+	description: 'An unexpected error page',
+};

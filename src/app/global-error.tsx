@@ -3,6 +3,7 @@
 import ErrorPageComponent from '@/components/ErrorPageComponent';
 import { Button } from '@radix-ui/themes';
 import * as Sentry from '@sentry/nextjs';
+import { Metadata } from 'next';
 import { useEffect } from 'react';
 
 interface IProps {
@@ -24,3 +25,8 @@ export default function GlobalErrorPage({ error, reset }: IProps) {
 		</ErrorPageComponent>
 	);
 }
+
+export const metadata: Metadata = {
+	title: 'Issue Tracker - Unexpected Error',
+	description: 'An unexpected error page',
+};

@@ -14,7 +14,7 @@ const NotFoundPage = () => {
 };
 
 export const metadata: Metadata = {
-	title: '404 Not Found',
+	title: 'Issue Tracker - 404 Not Found',
 	description: "This page doesn't exist",
 };
 

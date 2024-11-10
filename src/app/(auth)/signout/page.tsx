@@ -19,5 +19,5 @@ export default SignOutPage;
 
 export const metadata: Metadata = {
 	title: 'Issue Tracker - Sign Out',
-	description: 'Sign out from Issue Tracker',
+	description: 'Sign out of Issue Tracker',
 };

@@ -3,6 +3,7 @@ import ResendEmailButton from '@/components/ResendEmailButton';
 import { activateUser, getUserById } from '@/repository/userRepository';
 import { compareHashedData } from '@/utils/crypt';
 import { Heading, Text } from '@radix-ui/themes';
+import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { Toaster } from 'react-hot-toast';
 
@@ -50,6 +51,11 @@ const ActivationPage = async ({ searchParams }: IProps) => {
 			<Toaster />
 		</div>
 	);
+};
+
+export const metadata: Metadata = {
+	title: 'Issue Tracker - Account Activation',
+	description: 'Account Activation Details',
 };
 
 export default ActivationPage;

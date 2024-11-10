@@ -1,5 +1,6 @@
 import SignUpForm from '@/components/forms/SignUpForm';
 import { Heading } from '@radix-ui/themes';
+import { Metadata } from 'next';
 
 const SignUpPage = () => {
 	return (
@@ -8,6 +9,11 @@ const SignUpPage = () => {
 			<SignUpForm />
 		</div>
 	);
+};
+
+export const metadata: Metadata = {
+	title: 'Issue Tracker - Sign Up',
+	description: 'Create an Account for Issue Tracker',
 };
 
 export default SignUpPage;
