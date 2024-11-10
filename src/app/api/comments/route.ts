@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
 	if (!validation.success)
 		return NextResponse.json(validation.error.format(), { status: 400 });
 
-	const newComment = await createComment(body);
+	await createComment(body);
 
-	return NextResponse.json(newComment, { status: 201 });
+	return NextResponse.json({}, { status: 201 });
 }

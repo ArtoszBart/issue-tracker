@@ -53,9 +53,9 @@ export async function PATCH(request: NextRequest, { params }: IProps) {
 	if (!issue)
 		return NextResponse.json({ error: 'Invalid issue' }, { status: 404 });
 
-	const updatedIssue = await updateIssue(id, body);
+	await updateIssue(id, body);
 
-	return NextResponse.json(updatedIssue);
+	return NextResponse.json({});
 }
 
 export async function DELETE(request: NextRequest, { params }: IProps) {

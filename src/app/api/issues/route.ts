@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
 	if (!validation.success)
 		return NextResponse.json(validation.error.format(), { status: 400 });
 
-	const newIssue = await createIssue(body);
+	await createIssue(body);
 
-	return NextResponse.json(newIssue, { status: 201 });
+	return NextResponse.json({}, { status: 201 });
 }

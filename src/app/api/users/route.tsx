@@ -9,7 +9,10 @@ import { NextRequest, NextResponse } from 'next/server';
 export const dynamic = 'force-dynamic';
 
 export async function GET() {
-	const users = await getUsers();
+	const users = (await getUsers()).map((user) => ({
+		id: user.id,
+		name: user.name,
+	}));
 
 	return NextResponse.json(users);
 }
@@ -45,5 +48,5 @@ export async function POST(request: NextRequest) {
 		return NextResponse.json({ error }, { status: 500 });
 	}
 
-	return NextResponse.json(newUser, { status: 201 });
+	return NextResponse.json({ id: newUser.id }, { status: 201 });
 }

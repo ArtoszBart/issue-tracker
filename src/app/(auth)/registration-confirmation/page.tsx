@@ -4,7 +4,6 @@ import { Spinner } from '@/components';
 import LinkButton from '@/components/LinkButton';
 import { Heading, Text } from '@radix-ui/themes';
 import axios from 'axios';
-import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import { useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
@@ -49,11 +48,6 @@ const RegistrationConfirmationPage = ({ searchParams }: IProps) => {
 			<Toaster />
 		</div>
 	);
-};
-
-export const metadata: Metadata = {
-	title: 'Issue Tracker - Registration Confirmation',
-	description: 'Account Created Successfully',
 };
 
 export default RegistrationConfirmationPage;
