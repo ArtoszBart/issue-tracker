@@ -2,7 +2,6 @@
 
 import ErrorPageComponent from '@/components/ErrorPageComponent';
 import { Button } from '@radix-ui/themes';
-import { Metadata } from 'next';
 
 interface IProps {
 	error: Error;
