@@ -23,8 +23,3 @@ const ErrorPage = ({ error, reset }: IProps) => {
 };
 
 export default ErrorPage;
-
-export const metadata: Metadata = {
-	title: 'Issue Tracker - Unexpected Error',
-	description: 'An unexpected error page',
-};

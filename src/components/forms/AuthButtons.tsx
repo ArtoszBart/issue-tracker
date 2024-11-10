@@ -4,11 +4,13 @@ import { Button } from '@radix-ui/themes';
 import { FcGoogle } from 'react-icons/fc';
 import { FaFacebook, FaGithub } from 'react-icons/fa';
 import { signIn } from 'next-auth/react';
+import toast from 'react-hot-toast';
 
 const AuthButtons = () => {
 	const handleClick = async (service: string) => {
-		const res = await signIn(service, { callbackUrl: '/' });
-		console.log(res);
+		await signIn(service, { callbackUrl: '/' }).catch(() =>
+			toast.error('Failed to sign in')
+		);
 	};
 
 	const providers = [

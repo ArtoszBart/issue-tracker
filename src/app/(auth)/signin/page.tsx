@@ -6,6 +6,7 @@ import { Heading } from '@radix-ui/themes';
 import { Metadata } from 'next';
 import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
+import { Toaster } from 'react-hot-toast';
 
 const page = async () => {
 	const session = await getServerSession(authOptions);
@@ -25,6 +26,7 @@ const page = async () => {
 					<AuthButtons />
 				</div>
 			</div>
+			<Toaster />
 		</div>
 	);
 };
