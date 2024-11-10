@@ -10,6 +10,9 @@
     "migrate": "npx prisma migrate dev",
     "email": "email dev -p 3030 -d src/emails"
   },
+  "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+  },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
     "@next-auth/prisma-adapter": "^1.0.7",
