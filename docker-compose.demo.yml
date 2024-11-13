@@ -1,0 +1,38 @@
+services:
+  database: 
+    container_name: issue-tracker-prod-db
+    image: postgres:17.0-alpine3.20
+    environment:
+      POSTGRES_PASSWORD: supersecretpassword:)
+      POSTGRES_DB: issue-tracker
+    ports:
+      - 5432:5432
+    volumes:
+      - issue-tracker:/data/db
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d issue-tracker"]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 10s
+
+  app:
+    container_name: issue-tracker-prod-app
+    build:
+      context: ./
+      dockerfile: Dockerfile.demo
+    env_file: '.env'
+    environment:
+      DATABASE_URL: "postgresql://postgres:supersecretpassword:)@database:5432/issue-tracker?schema=public"
+    depends_on:
+      database:
+        condition: service_healthy
+        restart: true
+    ports:
+      - 3000:3000
+    command: ['sh', 'docker-entrypoint.demo.sh']
+    restart: unless-stopped
+
+volumes:
+  issue-tracker:

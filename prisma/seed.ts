@@ -3,6 +3,16 @@ import { PrismaClient, Status } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
+	// Check if database is already seeded
+	const userNo = await prisma.user.count();
+	const issueNo = await prisma.issue.count();
+	const commentNo = await prisma.comment.count();
+
+	if (userNo !== 0 || issueNo !== 0 || commentNo !== 0)
+		return console.log(
+			'Database is already seeded. Skipping seeding process.'
+		);
+
 	// Create users
 	await prisma.user.createMany({
 		data: [

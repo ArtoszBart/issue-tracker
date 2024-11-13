@@ -42,3 +42,4 @@ next-env.d.ts
 
 # others
 TODO.md
+prisma/seed.js

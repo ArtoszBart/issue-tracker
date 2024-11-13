@@ -1,0 +1,5 @@
+.next/
+node_modules/
+README.md
+TODO.md
+prisma/seed.js
