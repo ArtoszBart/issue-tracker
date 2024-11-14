@@ -129,7 +129,7 @@ Issue Tracker is built with the following tools and frameworks to ensure a robus
 4. **Run Database Migrations:**
 
     ```bash
-    npx prisma migrate dev
+    npm run db:migrate-dev
     ```
 
     This applies Prisma migrations to your database, ensuring your schema is updated to reflect any changes.
@@ -137,7 +137,7 @@ Issue Tracker is built with the following tools and frameworks to ensure a robus
 5. **Seed the Database with Dummy Data:**
 
     ```bash
-    node prisma/seed.js
+    npm run db:seed
     ```
 
     This step populates the database with dummy data for testing purposes. This will help simulate a real-world environment for the application.
