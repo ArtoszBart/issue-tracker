@@ -2,10 +2,10 @@
 echo "Starting server container..."
 
 echo "Migrating the databse..."
-npx prisma migrate deploy
+npm run db:migrate-prod
 
 echo "Seeding the databse..."
-node prisma/seed.js
+npm run db:seed
 
 echo "Starting the server..."
 npm start
