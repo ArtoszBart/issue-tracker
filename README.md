@@ -94,6 +94,12 @@ Issue Tracker is built with the following tools and frameworks to ensure a robus
 
     Now that everything is set up, you can access the application running locally on your machine at this URL.
 
+> [!NOTE]  
+> If you don't want to create a new account but still want to test the application, you can log in using the example credentials created during the database seeding process:
+>
+> -   Email: john.doe@example.com
+> -   Password: password
+
 ---
 
 ### Option 2: Setup with Node.js and npm
