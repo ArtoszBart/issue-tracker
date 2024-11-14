@@ -84,9 +84,10 @@ Issue Tracker is built with the following tools and frameworks to ensure a robus
     docker-compose -f docker-compose.demo.yml up
     ```
 
-    > **_NOTE:_** This command may take longer the first time it runs, as it needs to download and build the required Docker images.
-
     This step will start both the app and the PostgreSQL database in containers, applies migrations to your database, and populates the database with dummy data.
+
+> [!NOTE]  
+> This command may take longer the first time it runs, as it needs to download and build the required Docker images.
 
 2. **Access the Application:**  
    Open http://localhost:3000 in your browser to view the app.
@@ -135,7 +136,8 @@ Issue Tracker is built with the following tools and frameworks to ensure a robus
 
     This step populates the database with dummy data for testing purposes. This will help simulate a real-world environment for the application.
 
-    > **_NOTE:_** You can skip this step if you do not want any dummy data in the database.
+> [!TIP]  
+> You can skip this step if you do not want any dummy data in the database.
 
 6. **Start the Application:**
 
@@ -160,6 +162,15 @@ Issue Tracker is built with the following tools and frameworks to ensure a robus
     Open http://localhost:3000 in your browser to view the app.
 
     You can now view the app running locally at this URL.
+
+> [!NOTE]  
+> If you don't want to create a new account but still want to test the application, you can log in using the example credentials created during the database seeding process:
+>
+> -   Email: john.doe@example.com
+> -   Password: password
+
+> [!IMPORTANT]  
+> Logging in with example credentaials will only work if you have completed the **Seed the Database with Dummy Data** step
 
 ### Environment Variables
 
