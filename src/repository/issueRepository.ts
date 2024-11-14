@@ -83,10 +83,17 @@ export async function updateIssue(
 	});
 }
 
-export async function deleteIssue(id: number): Promise<Issue> {
-	return await prisma.issue.delete({
-		where: {
-			id,
-		},
-	});
+export async function deleteIssue(id: number) {
+	return prisma.$transaction([
+		prisma.comment.deleteMany({
+			where: {
+				issueId: id,
+			},
+		}),
+		prisma.issue.delete({
+			where: {
+				id,
+			},
+		}),
+	]);
 }
