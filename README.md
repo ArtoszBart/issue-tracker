@@ -2,6 +2,8 @@
 
 Issue Tracker is a fast and responsive web application designed for efficient issue management. It allows users to create, manage, and track issues, with real-time updates on their statuses, assignments, and detailed information. Built with a modern tech stack, Issue Tracker offers a seamless and intuitive experience for teams and individual users who need a reliable way to track issues and collaborate effectively.
 
+Check out the live version of the app here: [Issue Tracker](https://issue-tracker.bartart.dev).
+
 ## Key Features
 
 ### Dashboard
